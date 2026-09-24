@@ -123,7 +123,124 @@ public class Hotel {
 
         return false;
     }
+    // =========================
+// CRUD DE RESERVA
+// =========================
 
+    // CREAR
+    public boolean registrarReserva(Reserva reserva) {
+
+        if (buscarReserva(reserva.getCodigoReserva()) != null) {
+            return false;
+        }
+
+        for (int i = 0; i < listaReservas.length; i++) {
+
+            if (listaReservas[i] == null) {
+                listaReservas[i] = reserva;
+
+                // También relacionamos la reserva con el huésped
+                if (reserva.getHuesped() != null) {
+                    reserva.getHuesped().getListaReservas().add(reserva);
+                }
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // BUSCAR
+    public Reserva buscarReserva(String codigoReserva) {
+
+        for (Reserva aux : listaReservas) {
+
+            if (aux != null &&
+                    aux.getCodigoReserva().equals(codigoReserva)) {
+
+                return aux;
+            }
+        }
+
+        return null;
+    }
+
+    // CONSULTAR
+    public String consultarReserva(String codigoReserva) {
+
+        Reserva reserva = buscarReserva(codigoReserva);
+
+        if (reserva != null) {
+
+            return "Reserva encontrada:\n" +
+                    "Código: " + reserva.getCodigoReserva() + "\n" +
+                    "Fecha: " + reserva.getFechaReserva() + "\n" +
+                    "Noches: " + reserva.getNumeroNoches() + "\n" +
+                    "Cantidad de huéspedes: " + reserva.getCantidadHuespedes() + "\n" +
+                    "Estado: " + reserva.getEstadoReserva() + "\n" +
+                    "Método de pago: " + reserva.getMetodoPago() + "\n" +
+                    "Valor total: $" + reserva.getValorTotal();
+        }
+
+        return "La reserva con código " +
+                codigoReserva +
+                " no se encuentra registrada.";
+    }
+
+    // ACTUALIZAR
+    public boolean actualizarReserva(String codigoReserva,
+                                     String fechaNueva,
+                                     int numeroNochesNuevo,
+                                     int cantidadHuespedesNueva,
+                                     String estadoNuevo,
+                                     String metodoPagoNuevo) {
+
+        Reserva reservaEncontrada =
+                buscarReserva(codigoReserva);
+
+        if (reservaEncontrada != null) {
+
+            reservaEncontrada.setFechaReserva(fechaNueva);
+            reservaEncontrada.setNumeroNoches(numeroNochesNuevo);
+            reservaEncontrada.setCantidadHuespedes(cantidadHuespedesNueva);
+            reservaEncontrada.setEstadoReserva(estadoNuevo);
+            reservaEncontrada.setMetodoPago(metodoPagoNuevo);
+
+            reservaEncontrada.calcularValorTotal();
+
+            return true;
+        }
+
+        return false;
+    }
+
+    // ELIMINAR
+    public boolean eliminarReserva(String codigoReserva) {
+
+        for (int i = 0; i < listaReservas.length; i++) {
+
+            if (listaReservas[i] != null &&
+                    listaReservas[i].getCodigoReserva().equals(codigoReserva)) {
+
+                Reserva reservaEliminada = listaReservas[i];
+
+                // La quitamos también de la lista del huésped
+                if (reservaEliminada.getHuesped() != null) {
+                    reservaEliminada
+                            .getHuesped()
+                            .getListaReservas()
+                            .remove(reservaEliminada);
+                }
+
+                listaReservas[i] = null;
+
+                return true;
+            }
+        }
+
+        return false;
+    }
 
 
     public String reportarDisponibilidad() {
