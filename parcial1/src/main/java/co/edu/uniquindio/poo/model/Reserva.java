@@ -67,7 +67,7 @@ public class Reserva {
         for (Habitacion aux : listaHabitaciones) {
             sumaPrecioNoches += aux.getPrecioNoche();
         }
-        this.valorTotal = sumaPrecioNoches * numeroNoches * listaHabitaciones.size();
+        this.valorTotal = sumaPrecioNoches * numeroNoches;
     }
 
     public boolean esCapicua() {
