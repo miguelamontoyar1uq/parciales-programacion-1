@@ -8,6 +8,7 @@ import java.util.ArrayList;
  * @Version : 1.1
  * @Fecha : 24/09/26
  */
+
 public class Hotel {
 
     private String nombreComercial;
@@ -94,10 +95,9 @@ public class Hotel {
 
     // ELIMINAR
     public boolean eliminarHuesped(String telefono) {
-        Huesped huespedEncontrado =
+        Huesped huespedEncontrado = buscarHuesped(telefono);
 
         if (huespedEncontrado != null) {
-
             listaHuespedes.remove(huespedEncontrado);
             return true;
         }
@@ -113,6 +113,7 @@ public class Hotel {
                 return aux;
             }
         }
+        return null;
     }
 
     public boolean crearReserva(Reserva reserva) {
@@ -128,6 +129,12 @@ public class Hotel {
                     reserva.getHuesped().getListaReservas().add(reserva);
                 }
 
+                for (Habitacion hab : reserva.getListaHabitaciones()) {
+                    if (reserva.getEstadoReserva().equalsIgnoreCase("Confirmada")) {
+                        hab.setEstado("Reservada");
+                    }
+                }
+
                 return true;
             }
         }
@@ -135,8 +142,6 @@ public class Hotel {
         return false;
     }
 
-    // BUSCAR
-    public Reserva buscarReserva(String codigoReserva) {
     // CONSULTAR
     public String consultarReserva(String codigoReserva) {
         Reserva reserva = buscarReserva(codigoReserva);

@@ -6,6 +6,7 @@ package co.edu.uniquindio.poo.model;
  * @Version : 1.1
  * @Fecha : 24/09/26
  */
+
 public class Habitacion {
     private String numero;
     private String tipo; // individual, doble o suite
