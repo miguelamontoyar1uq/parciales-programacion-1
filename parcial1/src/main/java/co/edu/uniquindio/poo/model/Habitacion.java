@@ -1,7 +1,11 @@
 package co.edu.uniquindio.poo.model;
 
-import java.util.ArrayList;
-
+/**
+ * Clase Habitacion para el sistema de gestión
+ * @author : Miguel Angel Montoya - Andrés Felipe Barrios
+ * @Version : 1.1
+ * @Fecha : 24/09/26
+ */
 public class Habitacion {
     private String numero;
     private String tipo; // individual, doble o suite
@@ -22,6 +26,7 @@ public class Habitacion {
     public String getNumero() {
         return numero;
     }
+
     public void setNumero(String numero) {
         this.numero = numero;
     }
@@ -29,6 +34,7 @@ public class Habitacion {
     public String getTipo() {
         return tipo;
     }
+
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
@@ -36,6 +42,7 @@ public class Habitacion {
     public int getPiso() {
         return piso;
     }
+
     public void setPiso(int piso) {
         this.piso = piso;
     }
@@ -43,6 +50,7 @@ public class Habitacion {
     public int getCapacidadMax() {
         return capacidadMax;
     }
+
     public void setCapacidadMax(int capacidadMax) {
         this.capacidadMax = capacidadMax;
     }
@@ -50,6 +58,7 @@ public class Habitacion {
     public double getPrecioNoche() {
         return precioNoche;
     }
+
     public void setPrecioNoche(double precioNoche) {
         this.precioNoche = precioNoche;
     }
@@ -57,6 +66,7 @@ public class Habitacion {
     public String getEstado() {
         return estado;
     }
+
     public void setEstado(String estado) {
         this.estado = estado;
     }

@@ -2,6 +2,12 @@ package co.edu.uniquindio.poo.model;
 
 import java.util.ArrayList;
 
+/**
+ * Clase Reserva para el sistema de gestión
+ * @author : Miguel Angel Montoya - Andrés Felipe Barrios
+ * @Version : 1.1
+ * @Fecha : 24/09/26
+ */
 public class Reserva {
     private String codigoReserva;
     private String fechaReserva;
@@ -98,7 +104,6 @@ public class Reserva {
         this.listaHabitaciones = listaHabitaciones;
     }
 
-
     public void agregarHabitacion(Habitacion habitacion) {
         listaHabitaciones.add(habitacion);
         if (estadoReserva.equalsIgnoreCase("Confirmada")) {
@@ -121,7 +126,7 @@ public class Reserva {
         }
         String invertida = "";
         for (int i = codigoReserva.length() - 1; i >= 0; i--) {
-            invertida+= codigoReserva.charAt(i);
+            invertida += codigoReserva.charAt(i);
         }
         return codigoReserva.equals(invertida);
     }
@@ -134,5 +139,4 @@ public class Reserva {
                 ", valorTotal=" + valorTotal +
                 '}';
     }
-
 }

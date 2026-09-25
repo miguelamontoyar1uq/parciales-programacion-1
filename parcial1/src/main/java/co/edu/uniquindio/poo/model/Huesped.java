@@ -2,6 +2,12 @@ package co.edu.uniquindio.poo.model;
 
 import java.util.ArrayList;
 
+/**
+ * Clase Huesped para el sistema de gestión
+ * @author : Miguel Angel Montoya - Andrés Felipe Barrios
+ * @Version : 1.1
+ * @Fecha : 24/09/26
+ */
 public class Huesped {
     private String documento;
     private String nombre;
@@ -22,6 +28,7 @@ public class Huesped {
     public String getDocumento() {
         return documento;
     }
+
     public void setDocumento(String documento) {
         this.documento = documento;
     }
@@ -29,6 +36,7 @@ public class Huesped {
     public String getNombre() {
         return nombre;
     }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -36,6 +44,7 @@ public class Huesped {
     public byte getEdad() {
         return edad;
     }
+
     public void setEdad(byte edad) {
         this.edad = edad;
     }
@@ -43,6 +52,7 @@ public class Huesped {
     public String getTelefono() {
         return telefono;
     }
+
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
@@ -50,6 +60,7 @@ public class Huesped {
     public String getCiudad() {
         return ciudad;
     }
+
     public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
     }
@@ -57,6 +68,7 @@ public class Huesped {
     public ArrayList<Reserva> getListaReservas() {
         return listaReservas;
     }
+
     public void setListaReservas(ArrayList<Reserva> listaReservas) {
         this.listaReservas = listaReservas;
     }
