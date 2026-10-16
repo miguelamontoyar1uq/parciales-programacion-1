@@ -122,6 +122,14 @@ public class Taller {
     public Optional<Repuesto> buscarRepuesto(String codigo){
         return listaRepuestos.stream().filter(repuesto -> repuesto.getCodigo().equals(codigo)).findFirst();
     }
+    //Crud equipo
+    public Optional<EquipoTecnologico> buscarEquipo (String codigoRegistro) {
+        return listaClientes.stream().flatMap(cliente -> cliente.getListaEquipos().stream()).filter(equipo-> equipo.getCodigoRegistro().equals(codigoRegistro)).findFirst();
+
+        // mano hay use esa mierda de flat map. ya que pues cada cliente tiene
+        // una lista de equipos asi que eso extrae la lista de cada cliente y
+        // las une en solo un flujo para comparar de una
+    }
 
     @Override
     public String toString() {

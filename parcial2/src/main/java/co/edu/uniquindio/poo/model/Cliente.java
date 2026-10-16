@@ -56,7 +56,9 @@ public class Cliente {
     public List<EquipoTecnologico> getListaEquipos() {
         return Collections.unmodifiableList( listaEquipos);
     }
-
+    public void agregarEquipo(EquipoTecnologico equipo) {
+        listaEquipos.add(equipo);
+    }
     @Override
     public String toString() {
         return "Cliente{" +
