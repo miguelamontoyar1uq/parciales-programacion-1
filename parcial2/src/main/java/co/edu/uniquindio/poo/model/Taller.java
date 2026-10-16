@@ -3,6 +3,7 @@ package co.edu.uniquindio.poo.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public class Taller {
     private final String nombre;
@@ -66,6 +67,24 @@ public class Taller {
 
     public List<Repuesto> getListaRepuestos() {
         return Collections.unmodifiableList(listaRepuestos);
+    }
+    //Crud Cliente
+    //Crear
+    public boolean crearCliente(Cliente cliente) {
+        Optional<Cliente> buscado=buscarCliente(cliente.getDocumento());
+        if(buscado.isPresent()){
+            return false;
+        }
+
+            listaClientes.add(cliente);
+            return true;
+
+    }
+
+
+    //buscar
+    public Optional<Cliente> buscarCliente(String documento){
+        return listaClientes.stream().filter(cliente -> cliente.getDocumento().equals(documento)).findFirst();
     }
 
 

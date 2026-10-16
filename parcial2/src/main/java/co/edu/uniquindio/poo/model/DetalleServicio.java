@@ -88,7 +88,6 @@ public class DetalleServicio {
     public List<DetalleRepuesto> getRepuestosUtilizados() {
         return repuestosUtilizados;
     }
-    
 
     @Override
     public String toString() {
