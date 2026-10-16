@@ -103,9 +103,22 @@ public class Taller {
     }
 //Crud repuesto
     //Crear
+    public boolean crearRepuesto(Repuesto repuesto){
+        Optional<Repuesto> buscado= buscarRepuesto(repuesto.getCodigo());
+        if(buscado.isPresent()) {
+            return false;
+        }
+        listaRepuestos.add(repuesto);
+        return true;
+
+
+    }
 
 
     //buscar
+    public Optional<Repuesto> buscarRepuesto(String codigo){
+        return listaRepuestos.stream().filter(repuesto -> repuesto.getCodigo().equals(codigo)).findFirst();
+    }
 
     @Override
     public String toString() {
