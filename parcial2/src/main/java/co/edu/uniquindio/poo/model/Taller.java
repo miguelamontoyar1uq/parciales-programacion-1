@@ -86,7 +86,26 @@ public class Taller {
     public Optional<Cliente> buscarCliente(String documento){
         return listaClientes.stream().filter(cliente -> cliente.getDocumento().equals(documento)).findFirst();
     }
+    //Crud Tecnico
+    //Crear
+    public boolean crearTecnico(Tecnico tecnico){
+        Optional<Tecnico> buscado = buscarTecnico(tecnico.getCodigo());
+        if(buscado.isPresent()){
+            return false;
+        }
+        listaTecnicos.add(tecnico);
+        return true;
+    }
 
+    //Buscar
+    public Optional<Tecnico> buscarTecnico (String codigo){
+        return listaTecnicos.stream().filter(tecnico -> tecnico.getCodigo().equals(codigo)).findFirst();
+    }
+//Crud repuesto
+    //Crear
+
+
+    //buscar
 
     @Override
     public String toString() {
