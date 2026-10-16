@@ -1,15 +1,10 @@
 package co.edu.uniquindio.poo.model;
 
-import co.edu.uniquindio.poo.model.DetalleRepuesto;
-import co.edu.uniquindio.poo.model.EstadoDetalle;
-import co.edu.uniquindio.poo.model.Servicio;
-import co.edu.uniquindio.poo.model.Tecnico;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class DetalleServicio {
-    private String codigoDetalle;
+    private  final String codigoDetalle;
     private EquipoTecnologico equipo;
     private Servicio servicio;
     private String fallaReportada;
@@ -30,5 +25,86 @@ public class DetalleServicio {
         this.observacionesTecnicas = "";
     }
 
+    public String getCodigoDetalle() {
+        return codigoDetalle;
+    }
 
+    public EquipoTecnologico getEquipo() {
+        return equipo;
+    }
+
+    public void setEquipo(EquipoTecnologico equipo) {
+        this.equipo = equipo;
+    }
+
+    public Servicio getServicio() {
+        return servicio;
+    }
+
+    public void setServicio(Servicio servicio) {
+        this.servicio = servicio;
+    }
+
+    public String getFallaReportada() {
+        return fallaReportada;
+    }
+
+    public void setFallaReportada(String fallaReportada) {
+        this.fallaReportada = fallaReportada;
+    }
+
+    public Tecnico getTecnicoAsignado() {
+        return tecnicoAsignado;
+    }
+
+    public void setTecnicoAsignado(Tecnico tecnicoAsignado) {
+        this.tecnicoAsignado = tecnicoAsignado;
+    }
+
+    public String getObservacionesTecnicas() {
+        return observacionesTecnicas;
+    }
+
+    public void setObservacionesTecnicas(String observacionesTecnicas) {
+        this.observacionesTecnicas = observacionesTecnicas;
+    }
+
+    public int getHorasTrabajo() {
+        return horasTrabajo;
+    }
+
+    public void setHorasTrabajo(int horasTrabajo) {
+        this.horasTrabajo = horasTrabajo;
+    }
+
+    public EstadoDetalle getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoDetalle estado) {
+        this.estado = estado;
+    }
+
+    public List<DetalleRepuesto> getRepuestosUtilizados() {
+        return repuestosUtilizados;
+    }
+
+    public void setRepuestosUtilizados(List<DetalleRepuesto> repuestosUtilizados) {
+        this.repuestosUtilizados = repuestosUtilizados;
+    }
+
+    @Override
+    public String toString() {
+        return "DetalleServicio{" +
+                "codigoDetalle='" + codigoDetalle + '\'' +
+                ", equipo=" + equipo +
+                ", servicio=" + servicio +
+                ", fallaReportada='" + fallaReportada + '\'' +
+                ", tecnicoAsignado=" + tecnicoAsignado +
+                ", horasTrabajo=" + horasTrabajo +
+                ", observacionesTecnicas='" + observacionesTecnicas + '\'' +
+                ", estado=" + estado +
+                ", repuestosUtilizados=" + repuestosUtilizados +
+                '}';
+    }
 }

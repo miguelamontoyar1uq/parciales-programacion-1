@@ -4,15 +4,16 @@ public abstract class Servicio {
     protected String codigo;
     protected String nombre;
     protected String descripcion;
-    protected float tarifaBase;
+    protected double tarifaBase;
 
-    public Servicio(String codigo, String nombre, String descripcion, float tarifaBase) {
+    public Servicio(String codigo, String nombre, String descripcion,
+                    double tarifaBase) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.tarifaBase = tarifaBase;
     }
-    public abstract float calcularCosto();
+    public abstract double calcularCosto();
 
     @Override
     public String toString() {
