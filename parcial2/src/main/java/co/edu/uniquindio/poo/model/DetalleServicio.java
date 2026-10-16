@@ -88,10 +88,7 @@ public class DetalleServicio {
     public List<DetalleRepuesto> getRepuestosUtilizados() {
         return repuestosUtilizados;
     }
-
-    public void setRepuestosUtilizados(List<DetalleRepuesto> repuestosUtilizados) {
-        this.repuestosUtilizados = repuestosUtilizados;
-    }
+    
 
     @Override
     public String toString() {

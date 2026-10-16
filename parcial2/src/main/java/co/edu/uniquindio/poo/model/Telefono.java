@@ -49,11 +49,16 @@ public class Telefono extends EquipoTecnologico{
     @Override
     public String toString() {
         return "Telefono{" +
-                "sistemaOperativo='" + sistemaOperativo + '\'' +
+                "estadoFisico='" + estadoFisico + '\'' +
+                ", sistemaOperativo='" + sistemaOperativo + '\'' +
                 ", almacenamiento='" + almacenamiento + '\'' +
                 ", capacidadBateria='" + capacidadBateria + '\'' +
                 ", compatible5G=" + compatible5G +
+                ", codigoRegistro='" + codigoRegistro + '\'' +
+                ", marca='" + marca + '\'' +
+                ", numeroSerie='" + numeroSerie + '\'' +
+                ", modelo='" + modelo + '\'' +
+                ", anioFabricacion='" + anioFabricacion + '\'' +
                 '}';
     }
-
 }

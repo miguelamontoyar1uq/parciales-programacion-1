@@ -57,9 +57,6 @@ public class OrdenServicio {
         return Collections.unmodifiableList(listaDetalles) ;
     }
 
-    public void setListaDetalles(List<DetalleServicio> listaDetalles) {
-        this.listaDetalles = listaDetalles;
-    }
 
     @Override
     public String toString() {

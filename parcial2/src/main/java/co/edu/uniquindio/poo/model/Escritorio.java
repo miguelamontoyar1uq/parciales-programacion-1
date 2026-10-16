@@ -45,5 +45,21 @@ public class Escritorio extends EquipoTecnologico {
     public void setGraficaDedicada(boolean graficaDedicada) {
         this.graficaDedicada = graficaDedicada;
     }
+
+    @Override
+    public String toString() {
+        return "Escritorio{" +
+                "estadoFisico='" + estadoFisico + '\'' +
+                ", procesador='" + procesador + '\'' +
+                ", ram='" + ram + '\'' +
+                ", almacenamiento='" + almacenamiento + '\'' +
+                ", graficaDedicada=" + graficaDedicada +
+                ", codigoRegistro='" + codigoRegistro + '\'' +
+                ", marca='" + marca + '\'' +
+                ", numeroSerie='" + numeroSerie + '\'' +
+                ", modelo='" + modelo + '\'' +
+                ", anioFabricacion='" + anioFabricacion + '\'' +
+                '}';
+    }
 }
 

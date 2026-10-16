@@ -53,6 +53,12 @@ public class Portatil extends EquipoTecnologico {
                 ", ram='" + ram + '\'' +
                 ", almacenamiento='" + almacenamiento + '\'' +
                 ", bateriaExtraible=" + bateriaExtraible +
+                ", codigoRegistro='" + codigoRegistro + '\'' +
+                ", numeroSerie='" + numeroSerie + '\'' +
+                ", marca='" + marca + '\'' +
+                ", modelo='" + modelo + '\'' +
+                ", estadoFisico='" + estadoFisico + '\'' +
+                ", anioFabricacion='" + anioFabricacion + '\'' +
                 '}';
     }
 }
