@@ -123,10 +123,29 @@ public class Taller {
         return listaRepuestos.stream().filter(repuesto -> repuesto.getCodigo().equals(codigo)).findFirst();
     }
     //Crud equipo
+    //Crear
+    //Crud equipo
+//Crear
+    public boolean crearEquipo(String documento, EquipoTecnologico equipo){
+        Optional<Cliente> cliente = buscarCliente(documento);
+        if(cliente.isEmpty()){
+            return false;
+        }
+        Optional<EquipoTecnologico> buscado = buscarEquipo(equipo.getCodigoRegistro());
+        if(buscado.isPresent()){
+            return false;
+        }
+        cliente.get().agregarEquipo(equipo);
+        return true;
+    }
+
+
+
+    //buscar
     public Optional<EquipoTecnologico> buscarEquipo (String codigoRegistro) {
         return listaClientes.stream().flatMap(cliente -> cliente.getListaEquipos().stream()).filter(equipo-> equipo.getCodigoRegistro().equals(codigoRegistro)).findFirst();
 
-        // mano hay use esa mierda de flat map. ya que pues cada cliente tiene
+        // mano ahi use esa mierda de flat map. ya que pues cada cliente tiene
         // una lista de equipos asi que eso extrae la lista de cada cliente y
         // las une en solo un flujo para comparar de una
     }
