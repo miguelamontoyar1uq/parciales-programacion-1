@@ -1,6 +1,8 @@
 package co.edu.uniquindio.poo.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Cliente {
     private final String nombre;
@@ -49,6 +51,10 @@ public class Cliente {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public List<EquipoTecnologico> getListaEquipos() {
+        return Collections.unmodifiableList( listaEquipos);
     }
 
     @Override
