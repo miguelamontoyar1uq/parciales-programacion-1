@@ -104,6 +104,9 @@ public class Taller {
 //Crud repuesto
     //Crear
     public boolean crearRepuesto(Repuesto repuesto){
+        if(repuesto.getCantidadDisponible()<0 || repuesto.getPrecioUnitario()<=0){
+            return false;
+        }
         Optional<Repuesto> buscado= buscarRepuesto(repuesto.getCodigo());
         if(buscado.isPresent()) {
             return false;
