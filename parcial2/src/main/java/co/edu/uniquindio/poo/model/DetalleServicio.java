@@ -96,7 +96,13 @@ public class DetalleServicio {
         repuestosUtilizados.add(new DetalleRepuesto(repuesto, cantidad));
         return true;
     }
-
+    public boolean actualizarEstado(EstadoDetalle nuevoEstado){
+        if(estado == EstadoDetalle.FINALIZADA || estado == EstadoDetalle.CANCELADA){
+            return false;
+        }
+        estado = nuevoEstado;
+        return true;
+    }
     @Override
     public String toString() {
         return "DetalleServicio{" +
@@ -110,5 +116,20 @@ public class DetalleServicio {
                 ", estado=" + estado +
                 ", repuestosUtilizados=" + repuestosUtilizados +
                 '}';
+    }
+    public boolean asignarTecnico(Tecnico tecnico){
+        if(!tecnico.estaActivo() || !tecnico.puedeAtender(equipo)){
+            return false;
+        }
+        tecnicoAsignado = tecnico;
+        return true;
+    }
+    // rechaza las horas en negativo y en ce
+    public boolean registrarHoras(int horas){
+        if(horas <= 0){
+            return false;
+        }
+        horasTrabajo = horas;
+        return true;
     }
 }

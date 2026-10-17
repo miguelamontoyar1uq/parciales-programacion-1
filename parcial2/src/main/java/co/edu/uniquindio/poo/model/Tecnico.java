@@ -46,6 +46,22 @@ public class Tecnico {
     public void setEstadoLaboralTecnico(EstadoLaboralTecnico estadoLaboralTecnico) {
         this.estadoLaboralTecnico = estadoLaboralTecnico;
     }
+    public boolean estaActivo(){
+        return estadoLaboralTecnico == EstadoLaboralTecnico.ACTIVO;
+    }
+
+    public boolean puedeAtender(EquipoTecnologico equipo){
+        if(especialidadTecnico == EspecialidadTecnico.SOPORTE_GENERAL){
+            return true;
+        }
+        if(especialidadTecnico == EspecialidadTecnico.COMPUTADORES){
+            return equipo instanceof Portatil || equipo instanceof Escritorio;
+        }
+        if(especialidadTecnico == EspecialidadTecnico.DISPOSITIVOS_MOVILES){
+            return equipo instanceof Telefono;
+        }
+        return false;
+    }
 
     @Override
     public String toString() {

@@ -70,6 +70,13 @@ public class OrdenServicio {
     public Optional<DetalleServicio> buscarDetalle(String codigoDetalle){
         return listaDetalles.stream().filter(detalle -> detalle.getCodigoDetalle().equals(codigoDetalle)).findFirst();
     }
+    public boolean finalizar(){
+        if(listaDetalles.isEmpty() || !listaDetalles.stream().allMatch(detalle -> detalle.getEstado() == EstadoDetalle.FINALIZADA)){
+            return false;
+        }
+        estadoOrden = EstadoOrden.FINALIZADA;
+        return true;
+    }
 
 
     @Override
