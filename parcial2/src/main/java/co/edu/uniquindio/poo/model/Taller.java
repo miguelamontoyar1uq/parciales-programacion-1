@@ -174,6 +174,16 @@ public class Taller {
 
     //Crud servicio
 
+    //Crear
+    public boolean crearServicio(Servicio servicio) {
+        Optional<Servicio> buscado = buscarServicio(servicio.getCodigo());
+        if (buscado.isPresent()) {
+            return false;
+        }
+        listaServicios.add(servicio);
+        return true;
+    }
+
 
     //Buscar
     public Optional<Servicio> buscarServicio(String codigo) {

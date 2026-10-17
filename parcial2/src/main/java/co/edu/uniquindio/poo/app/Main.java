@@ -10,12 +10,26 @@ public class Main {
                 "del burdel","231","3507823456");
         int opcion;
         do {
-            opcion= Integer.parseInt(JOptionPane.showInputDialog("BIENVENIDO " +
-                    "al sistema de " + taller.getNombre()+ "Seleccione la " +
-                    "opcion deseada" +
-                    " \n1.Registrar Cliente" +"\n2.Registar Equipo"+"\n3" +
-                    ".Registar tecnico" + "\n4.Registar Repuesto"+ "\5.Crear " +
-                    "Orden Servicio"));
+            opcion = Repositorio.ingresarEntero("MENÚ TECHREPAIR\n" +
+                    "1. Registrar cliente\n" +
+                    "2. Registrar equipo\n" +
+                    "3. Registrar técnico\n" +
+                    "4. Registrar repuesto\n" +
+                    "5. Crear orden de servicio\n" +
+                    "6. Agregar detalle a una orden\n" +
+                    "7. Asignar técnico\n" +
+                    "8. Registrar repuestos utilizados\n" +
+                    "9. Ver valor de una orden\n" +
+                    "10. Registrar horas de un detalle\n" +
+                    "11. Actualizar estado de un detalle\n" +
+                    "12. Finalizar una orden\n" +
+                    "13. Consultar órdenes de un cliente\n" +
+                    "14. Consultar trabajos de un técnico\n" +
+                    "15. Consultar equipos pendientes\n" +
+                    "16. Reporte de servicios\n" +
+                    "17. Reporte de técnicos\n" +
+                    "18. Inventario crítico\n" +
+                    "0. Salir");
             switch (opcion) {
 
                 case 1:
@@ -35,7 +49,7 @@ public class Main {
             }
 
 
-        } while(opcion!=5);
+        } while(opcion!=0);
 
     }
     private static void crearCliente(Taller taller){
@@ -117,5 +131,8 @@ public class Main {
         }else{
             Repositorio.mostrarMensaje("No se pudo registrar: el código ya existe, o el precio o la cantidad no son válidos");
         }
+    }
+    private static void crearOrden(Taller taller){
+
     }
     }
