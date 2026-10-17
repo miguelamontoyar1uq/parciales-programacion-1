@@ -8,7 +8,13 @@ public class ReparacionCorrectiva extends Servicio {
     }
 
     @Override
-    public double calcularCosto() {
-        return 0;
+    public double calcularCosto(DetalleServicio detalle) {
+        double costoManoObra = MANO_DE_OBRA * detalle.getHorasTrabajo();
+        double costoRepuestos = 0;
+        for(DetalleRepuesto repuesto : detalle.getRepuestosUtilizados()){
+            costoRepuestos += repuesto.calcularSubtotal();
+        }
+        return costoManoObra + costoRepuestos;
     }
 }
+

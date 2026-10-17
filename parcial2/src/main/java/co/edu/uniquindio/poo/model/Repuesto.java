@@ -49,12 +49,16 @@ public class Repuesto {
         return cantidadDisponible;
     }
 
-    public void setCantidadDisponible(int cantidadDisponible) {
-        this.cantidadDisponible = cantidadDisponible;
-    }
 
     public String getCategoriaCompatibilidad() {
         return categoriaCompatibilidad;
+    }
+    public boolean descontar(int cantidad){
+        if(cantidad<=0 || cantidad>cantidadDisponible){
+            return false;
+        }
+        cantidadDisponible-=cantidad;
+        return true;
     }
 
     @Override

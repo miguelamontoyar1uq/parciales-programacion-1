@@ -1,31 +1,28 @@
 package co.edu.uniquindio.poo.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class Taller {
     private final String nombre;
     private final String direccion;
     private final String nit;
     private final String telefono;
-    private ArrayList<Cliente> listaClientes;
+    private Map<String, Cliente> listaClientes;
     private ArrayList <Servicio> listaServicios;
     private ArrayList <OrdenServicio> listaOrdenesServicio;
     private ArrayList <Tecnico> listaTecnicos;
-    private ArrayList <Repuesto> listaRepuestos;
+    private Map<String, Repuesto> listaRepuestos;
 
     public Taller(String nombre, String direccion, String nit, String telefono) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.nit = nit;
         this.telefono = telefono;
-        listaClientes = new ArrayList<>();
+        listaClientes = new HashMap<>();
         listaOrdenesServicio=new ArrayList<>();
         listaServicios=new ArrayList<>();
         listaTecnicos=new ArrayList<>();
-        listaRepuestos=new ArrayList<>();
+        listaRepuestos= new HashMap<>();
 
     }
 
@@ -46,7 +43,7 @@ public class Taller {
     }
 
     public List<Cliente> getListaClientes() {
-        return Collections.unmodifiableList(listaClientes);
+        return Collections.unmodifiableList( new ArrayList<> (listaClientes.values()));
     }
 
 
@@ -66,7 +63,7 @@ public class Taller {
     }
 
     public List<Repuesto> getListaRepuestos() {
-        return Collections.unmodifiableList(listaRepuestos);
+        return Collections.unmodifiableList( new ArrayList<> (listaRepuestos.values()));
     }
     //Crud Cliente
     //Crear
@@ -76,15 +73,15 @@ public class Taller {
             return false;
         }
 
-            listaClientes.add(cliente);
-            return true;
+        listaClientes.put(cliente.getDocumento(), cliente);
+        return true;
 
     }
 
 
     //buscar
-    public Optional<Cliente> buscarCliente(String documento){
-        return listaClientes.stream().filter(cliente -> cliente.getDocumento().equals(documento)).findFirst();
+    public Optional<Cliente> buscarCliente(String documento) {
+        return Optional.ofNullable(listaClientes.get(documento));
     }
     //Crud Tecnico
     //Crear
@@ -101,7 +98,7 @@ public class Taller {
     public Optional<Tecnico> buscarTecnico (String codigo){
         return listaTecnicos.stream().filter(tecnico -> tecnico.getCodigo().equals(codigo)).findFirst();
     }
-//Crud repuesto
+    //Crud repuesto
     //Crear
     public boolean crearRepuesto(Repuesto repuesto){
         if(repuesto.getCantidadDisponible()<0 || repuesto.getPrecioUnitario()<=0){
@@ -111,7 +108,7 @@ public class Taller {
         if(buscado.isPresent()) {
             return false;
         }
-        listaRepuestos.add(repuesto);
+        listaRepuestos.put(repuesto.getCodigo(), repuesto);
         return true;
 
 
@@ -120,12 +117,11 @@ public class Taller {
 
     //buscar
     public Optional<Repuesto> buscarRepuesto(String codigo){
-        return listaRepuestos.stream().filter(repuesto -> repuesto.getCodigo().equals(codigo)).findFirst();
+        return Optional.ofNullable(listaRepuestos.get(codigo));
     }
+
     //Crud equipo
     //Crear
-    //Crud equipo
-//Crear
     public boolean crearEquipo(String documento, EquipoTecnologico equipo){
         Optional<Cliente> cliente = buscarCliente(documento);
         if(cliente.isEmpty()){
@@ -139,11 +135,10 @@ public class Taller {
         return true;
     }
 
-
-
+    //buscar
     //buscar
     public Optional<EquipoTecnologico> buscarEquipo (String codigoRegistro) {
-        return listaClientes.stream().flatMap(cliente -> cliente.getListaEquipos().stream()).filter(equipo-> equipo.getCodigoRegistro().equals(codigoRegistro)).findFirst();
+        return listaClientes.values().stream().flatMap(cliente -> cliente.getListaEquipos().stream()).filter(equipo-> equipo.getCodigoRegistro().equals(codigoRegistro)).findFirst();
 
         // mano ahi use esa mierda de flat map. ya que pues cada cliente tiene
         // una lista de equipos asi que eso extrae la lista de cada cliente y

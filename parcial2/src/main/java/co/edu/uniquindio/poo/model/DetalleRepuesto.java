@@ -35,6 +35,9 @@ public class DetalleRepuesto {
     public void setPrecioAplicado(double precioAplicado) {
         this.precioAplicado = precioAplicado;
     }
+    public double calcularSubtotal(){
+        return cantidad * precioAplicado;
+    }
 
     @Override
     public String toString() {

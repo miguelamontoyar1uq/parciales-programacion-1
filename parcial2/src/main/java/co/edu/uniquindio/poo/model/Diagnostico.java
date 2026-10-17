@@ -8,7 +8,7 @@ public class Diagnostico extends Servicio {
     }
 
     @Override
-    public double calcularCosto() {
-        return 0;
+    public double calcularCosto(DetalleServicio detalle) {
+        return COSTO_FIJO;
     }
 }

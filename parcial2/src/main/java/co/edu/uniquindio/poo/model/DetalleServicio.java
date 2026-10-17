@@ -1,6 +1,7 @@
 package co.edu.uniquindio.poo.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DetalleServicio {
@@ -86,7 +87,14 @@ public class DetalleServicio {
     }
 
     public List<DetalleRepuesto> getRepuestosUtilizados() {
-        return repuestosUtilizados;
+        return Collections.unmodifiableList(repuestosUtilizados);
+    }
+    public boolean agregarRepuesto(Repuesto repuesto, int cantidad){
+        if(!repuesto.descontar(cantidad)){
+            return false;
+        }
+        repuestosUtilizados.add(new DetalleRepuesto(repuesto, cantidad));
+        return true;
     }
 
     @Override

@@ -47,7 +47,7 @@ public abstract class Servicio {
         this.tarifaBase = tarifaBase;
     }
 
-    public abstract double calcularCosto();
+    public abstract double calcularCosto(DetalleServicio detalle);
 
     @Override
     public String toString() {

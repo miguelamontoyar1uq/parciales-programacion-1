@@ -9,7 +9,19 @@ public class MantenimientoPreventivo extends Servicio {
     }
 
     @Override
-    public double calcularCosto() {
+    public double calcularCosto(DetalleServicio detalle) {
+        if(detalle.getEquipo() instanceof Portatil){
+            return TARIFA_PORTATIL;
+        }
+        if(detalle.getEquipo() instanceof Escritorio){
+            return TARIFA_ESCRITORIO;
+        }
+        if(detalle.getEquipo() instanceof Telefono){
+            return TARIFA_CELULAR;
+        }
         return 0;
     }
 }
+
+
+

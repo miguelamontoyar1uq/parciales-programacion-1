@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public class OrdenServicio {
     private final String codigoOrden;
@@ -54,7 +55,20 @@ public class OrdenServicio {
     }
 
     public List<DetalleServicio> getListaDetalles() {
-        return Collections.unmodifiableList(listaDetalles) ;
+        return Collections.unmodifiableList(listaDetalles);
+    }
+    public boolean agregarDetalle(DetalleServicio detalleServicio){
+        Optional<DetalleServicio> buscado = buscarDetalle(detalleServicio.getCodigoDetalle());
+        if(buscado.isPresent()){
+            return false;
+        }
+        listaDetalles.add(detalleServicio);
+        return true;
+    }
+
+    //Buscar
+    public Optional<DetalleServicio> buscarDetalle(String codigoDetalle){
+        return listaDetalles.stream().filter(detalle -> detalle.getCodigoDetalle().equals(codigoDetalle)).findFirst();
     }
 
 
