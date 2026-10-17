@@ -6,8 +6,8 @@ public class Escritorio extends EquipoTecnologico {
     private String almacenamiento;
     private boolean graficaDedicada;
 
-    public Escritorio(String codigoRegistro, String numeroSerie, String marca, String modelo, String anioFabricacion, String estadoFisico, String procesador, String ram, String almacenamiento, boolean graficaDedicada) {
-        super(codigoRegistro, numeroSerie, marca, modelo, anioFabricacion, estadoFisico);
+    public Escritorio(String codigoRegistro, String numeroSerie, String marca, String modelo, String yearFabricacion, String estadoFisico, String procesador, String ram, String almacenamiento, boolean graficaDedicada) {
+        super(codigoRegistro, numeroSerie, marca, modelo, yearFabricacion, estadoFisico);
         this.procesador = procesador;
         this.ram = ram;
         this.almacenamiento = almacenamiento;
@@ -58,7 +58,7 @@ public class Escritorio extends EquipoTecnologico {
                 ", marca='" + marca + '\'' +
                 ", numeroSerie='" + numeroSerie + '\'' +
                 ", modelo='" + modelo + '\'' +
-                ", anioFabricacion='" + anioFabricacion + '\'' +
+                ", yearFabricacion='" + yearFabricacion + '\'' +
                 '}';
     }
 }

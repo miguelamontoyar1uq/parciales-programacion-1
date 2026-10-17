@@ -4,16 +4,16 @@ public abstract class EquipoTecnologico {
     protected final String codigoRegistro;
     protected final String numeroSerie;
     protected final String marca;
-    protected   String modelo;
-    protected String anioFabricacion;
+    protected String modelo;
+    protected String yearFabricacion;
     protected String estadoFisico;
 
-    public EquipoTecnologico(String codigoRegistro, String numeroSerie, String marca, String modelo, String anioFabricacion, String estadoFisico) {
+    public EquipoTecnologico(String codigoRegistro, String numeroSerie, String marca, String modelo, String yearFabricacion, String estadoFisico) {
         this.codigoRegistro = codigoRegistro;
         this.numeroSerie = numeroSerie;
         this.marca = marca;
         this.modelo = modelo;
-        this.anioFabricacion = anioFabricacion;
+        this.yearFabricacion = yearFabricacion;
         this.estadoFisico = estadoFisico;
     }
 
@@ -37,12 +37,12 @@ public abstract class EquipoTecnologico {
         this.modelo = modelo;
     }
 
-    public String getAnioFabricacion() {
-        return anioFabricacion;
+    public String getYearFabricacion() {
+        return yearFabricacion;
     }
 
-    public void setAnioFabricacion(String anioFabricacion) {
-        this.anioFabricacion = anioFabricacion;
+    public void setYearFabricacion(String yearFabricacion) {
+        this.yearFabricacion = yearFabricacion;
     }
 
     public String getEstadoFisico() {
@@ -60,7 +60,7 @@ public abstract class EquipoTecnologico {
                 ", numeroSerie='" + numeroSerie + '\'' +
                 ", marca='" + marca + '\'' +
                 ", modelo='" + modelo + '\'' +
-                ", anioFabricacion='" + anioFabricacion + '\'' +
+                ", yearFabricacion='" + yearFabricacion + '\'' +
                 ", estadoFisico='" + estadoFisico + '\'' +
                 '}';
     }

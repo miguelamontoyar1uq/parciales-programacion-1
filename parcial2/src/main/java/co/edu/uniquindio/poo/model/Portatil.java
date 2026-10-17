@@ -6,8 +6,8 @@ public class Portatil extends EquipoTecnologico {
     private String almacenamiento;
     private boolean bateriaExtraible;
 
-    public Portatil(String codigoRegistro, String numeroSerie, String marca, String modelo, String anioFabricacion, String estadoFisico, String tamanioPantalla, String ram, String almacenamiento, boolean bateriaExtraible) {
-        super(codigoRegistro, numeroSerie, marca, modelo, anioFabricacion, estadoFisico);
+    public Portatil(String codigoRegistro, String numeroSerie, String marca, String modelo, String yearFabricacion, String estadoFisico, String tamanioPantalla, String ram, String almacenamiento, boolean bateriaExtraible) {
+        super(codigoRegistro, numeroSerie, marca, modelo, yearFabricacion, estadoFisico);
         this.tamanioPantalla = tamanioPantalla;
         this.ram = ram;
         this.almacenamiento = almacenamiento;
@@ -58,7 +58,7 @@ public class Portatil extends EquipoTecnologico {
                 ", marca='" + marca + '\'' +
                 ", modelo='" + modelo + '\'' +
                 ", estadoFisico='" + estadoFisico + '\'' +
-                ", anioFabricacion='" + anioFabricacion + '\'' +
+                ", yearFabricacion='" + yearFabricacion + '\'' +
                 '}';
     }
 }

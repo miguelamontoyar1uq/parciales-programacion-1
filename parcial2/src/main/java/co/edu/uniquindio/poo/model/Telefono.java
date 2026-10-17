@@ -6,8 +6,8 @@ public class Telefono extends EquipoTecnologico{
     private String capacidadBateria;
     private boolean compatible5G;
 
-    public Telefono(String codigoRegistro, String numeroSerie, String marca, String modelo, String anioFabricacion, String estadoFisico, String sistemaOperativo, String almacenamiento, String capacidadBateria, boolean compatible5G) {
-        super(codigoRegistro, numeroSerie, marca, modelo, anioFabricacion, estadoFisico);
+    public Telefono(String codigoRegistro, String numeroSerie, String marca, String modelo, String yearFabricacion, String estadoFisico, String sistemaOperativo, String almacenamiento, String capacidadBateria, boolean compatible5G) {
+        super(codigoRegistro, numeroSerie, marca, modelo, yearFabricacion, estadoFisico);
         this.sistemaOperativo = sistemaOperativo;
         this.almacenamiento = almacenamiento;
         this.capacidadBateria = capacidadBateria;
@@ -58,7 +58,7 @@ public class Telefono extends EquipoTecnologico{
                 ", marca='" + marca + '\'' +
                 ", numeroSerie='" + numeroSerie + '\'' +
                 ", modelo='" + modelo + '\'' +
-                ", anioFabricacion='" + anioFabricacion + '\'' +
+                ", yearFabricacion='" + yearFabricacion + '\'' +
                 '}';
     }
 }
