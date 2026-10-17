@@ -310,6 +310,20 @@ public class Taller {
 
     }
 
+    // invenario critico
+    //Funcionalidad 18
+    public List<Repuesto> consultarInventarioCritico() {
+        return listaRepuestos.values().stream().filter(repuesto -> repuesto.getCantidadDisponible() < 5).toList();
+    }
+
+    public Map<String, Long> contarIntervencionesPorTecnico() {
+        return listaOrdenesServicio.stream().flatMap(orden -> orden.getListaDetalles().stream()).filter(detalle -> detalle.getTecnicoAsignado() != null && detalle.getEstado() == EstadoDetalle.FINALIZADA).collect(Collectors.groupingBy(detalle -> detalle.getTecnicoAsignado().getNombre(), Collectors.counting()));
+    }
+
+    public Map<String, Double> valorAtendidoPorTecnico() {
+        return listaOrdenesServicio.stream().flatMap(orden -> orden.getListaDetalles().stream()).filter(detalle -> detalle.getTecnicoAsignado() != null && detalle.getEstado() == EstadoDetalle.FINALIZADA).collect(Collectors.groupingBy(detalle -> detalle.getTecnicoAsignado().getNombre(), Collectors.summingDouble(detalle -> detalle.calcularValor())));
+    }
+
 
 
     @Override

@@ -103,6 +103,27 @@ public class DetalleServicio {
         estado = nuevoEstado;
         return true;
     }
+    public boolean asignarTecnico(Tecnico tecnico){
+        if(!tecnico.estaActivo() || !tecnico.puedeAtender(equipo)){
+            return false;
+        }
+        tecnicoAsignado = tecnico;
+        return true;
+    }
+
+    // rechaza las horas negativas y en cero
+    public boolean registrarHoras(int horas){
+        if(horas <= 0){
+            return false;
+        }
+        horasTrabajo = horas;
+        return true;
+    }
+
+    public double calcularValor(){
+        return servicio.calcularCosto(this);
+    }
+
     @Override
     public String toString() {
         return "DetalleServicio{" +
@@ -116,20 +137,5 @@ public class DetalleServicio {
                 ", estado=" + estado +
                 ", repuestosUtilizados=" + repuestosUtilizados +
                 '}';
-    }
-    public boolean asignarTecnico(Tecnico tecnico){
-        if(!tecnico.estaActivo() || !tecnico.puedeAtender(equipo)){
-            return false;
-        }
-        tecnicoAsignado = tecnico;
-        return true;
-    }
-    // rechaza las horas en negativo y en ce
-    public boolean registrarHoras(int horas){
-        if(horas <= 0){
-            return false;
-        }
-        horasTrabajo = horas;
-        return true;
     }
 }

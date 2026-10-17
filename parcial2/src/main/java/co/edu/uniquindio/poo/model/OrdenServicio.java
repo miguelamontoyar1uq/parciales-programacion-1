@@ -77,6 +77,13 @@ public class OrdenServicio {
         estadoOrden = EstadoOrden.FINALIZADA;
         return true;
     }
+    public double calcularValorTotal() {
+        double total = 0;
+        for (DetalleServicio detalle : listaDetalles) {
+            total += detalle.calcularValor();
+        }
+        return total;
+    }
 
 
     @Override
