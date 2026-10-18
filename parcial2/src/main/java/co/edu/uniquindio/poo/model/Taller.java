@@ -298,6 +298,11 @@ public class Taller {
         return listaOrdenesServicio.stream().filter(ordenServicio -> ordenServicio.getCliente().getDocumento().equals(documento)).toList();
     }
 
+    //Funcionalidad 16
+    public Map<String, Long> contarServiciosSolicitados() {
+        return listaOrdenesServicio.stream().flatMap(orden -> orden.getListaDetalles().stream()).collect(Collectors.groupingBy(detalle -> detalle.getServicio().getNombre(), Collectors.counting()));
+    }
+
     //consultar trabajos de un tecnico
     public Map<EstadoDetalle, List<DetalleServicio>> consultarTrabajosTecnico(String codigo) {
         return listaOrdenesServicio.stream().flatMap(ordenServicio -> ordenServicio.getListaDetalles().stream()).filter(detalleServicio -> detalleServicio.getTecnicoAsignado() != null && detalleServicio.getTecnicoAsignado().getCodigo().equals(codigo)).collect(Collectors.groupingBy(detalleServicio -> detalleServicio.getEstado()));
@@ -306,8 +311,8 @@ public class Taller {
         //.collect le dice a java que agrupe
         //Collectors.groupingBy esta parte tica decirle el criterio bajo el cual lo hara
         // Map<TipoDatoCriterio, List<ObjetoAgrupado>>
-// Clave (K): El criterio por el que agrupas (Código, Ciudad, Categoría, Edad, etc.)
-// Valor (V): La lista con los objetos que pertenecen a ese grupo
+        // Clave (K): El criterio por el que agrupas (Código, Ciudad, Categoría, Edad, etc.)
+        // Valor (V): La lista con los objetos que pertenecen a ese grupo
     }
     //consultar equipos pendientes
     public List<EquipoTecnologico> hallarEquiposPendientes(){
@@ -320,7 +325,7 @@ public class Taller {
 
     }
 
-    // invenario critico
+    // inventario critico
     //Funcionalidad 18
     public List<Repuesto> consultarInventarioCritico() {
         return listaRepuestos.values().stream().filter(repuesto -> repuesto.getCantidadDisponible() < 5).toList();
