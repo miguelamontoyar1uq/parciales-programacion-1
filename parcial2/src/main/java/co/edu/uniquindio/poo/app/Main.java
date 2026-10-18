@@ -3,11 +3,15 @@ package co.edu.uniquindio.poo.app;
 import co.edu.uniquindio.poo.model.*;
 
 import javax.swing.*;
+import java.util.Optional;
 
 public class Main {
     public static void main(String[] args) {
         Taller taller = new Taller("TechRepair","carrera 25 calle 22 detras " +
                 "del burdel","231","3507823456");
+        taller.crearServicio(new Diagnostico("SRV-001", "Diagnóstico", "Identificación de fallas del equipo", 0));
+        taller.crearServicio(new MantenimientoPreventivo("SRV-002", "Mantenimiento preventivo", "Limpieza, revisión y optimización", 0));
+        taller.crearServicio(new ReparacionCorrectiva("SRV-003", "Reparación correctiva", "Solución de fallas identificadas", 0));
         int opcion;
         do {
             opcion = Repositorio.ingresarEntero("MENÚ TECHREPAIR\n" +
@@ -29,6 +33,7 @@ public class Main {
                     "16. Reporte de servicios\n" +
                     "17. Reporte de técnicos\n" +
                     "18. Inventario crítico\n" +
+                    "19. Registrar servicio\n" +
                     "0. Salir");
             switch (opcion) {
 
@@ -36,6 +41,7 @@ public class Main {
                     crearCliente(taller);
                     break;
                 case 2:
+                    crearEquipo(taller);
 
                     break;
 
@@ -45,7 +51,29 @@ public class Main {
                 case 4:
                     registarRepuesto(taller);
                     break;
+                case 5:
+                    crearOrden(taller);
+                    break;
+                case 6:
+                    agregarDetalle(taller);
+                    break;
+                case 7:
+                    asignarTecnico(taller);
+                    break;
+                case 8:
+                    registrarRepuestoUtilizado(taller);
+                    break;
+                case 9:
+                    verValorOrden(taller);
+                    break;
+                case 10:
+                    registrarHoras(taller);
+                    break;
 
+                    // este es por si despues quieren agregar mas servicios
+                case 19:
+                 crearServicio(taller);
+                 break;
             }
 
 
@@ -132,5 +160,159 @@ public class Main {
             Repositorio.mostrarMensaje("No se pudo registrar: el código ya existe, o el precio o la cantidad no son válidos");
         }
     }
-    
+// crear equipo
+private static void crearEquipo(Taller taller){
+    String documento = Repositorio.ingresarTexto("Documento del cliente dueño del equipo");
+    String codigoRegistro = Repositorio.ingresarTexto("Código de registro del equipo");
+    String numeroSerie = Repositorio.ingresarTexto("Número de serie");
+    String marca = Repositorio.ingresarTexto("Marca");
+    String modelo = Repositorio.ingresarTexto("Modelo");
+    String year = Repositorio.ingresarTexto("Año de fabricación");
+    String estadoFisico = Repositorio.ingresarTexto("Estado físico del equipo");
+
+    String opcion = Repositorio.ingresarTexto("Seleccione la categoría:\n" +
+            "1. Portátil\n2. Escritorio\n3. Teléfono");
+    EquipoTecnologico equipo;
+    switch (opcion) {
+        case "1":
+            String pantalla = Repositorio.ingresarTexto("Tamaño de pantalla en pulgadas");
+            String ramPortatil = Repositorio.ingresarTexto("Memoria RAM");
+            String almacenamientoPortatil = Repositorio.ingresarTexto("Capacidad de almacenamiento");
+            boolean bateria = Repositorio.ingresarValorBooleano("¿Tiene batería extraíble?", "Batería");
+            equipo = new Portatil(codigoRegistro, numeroSerie, marca, modelo, year, estadoFisico,
+                    pantalla, ramPortatil, almacenamientoPortatil, bateria);
+            break;
+        case "2":
+            String procesador = Repositorio.ingresarTexto("Tipo de procesador");
+            String ramEscritorio = Repositorio.ingresarTexto("Memoria RAM");
+            String almacenamientoEscritorio = Repositorio.ingresarTexto("Capacidad de almacenamiento");
+            boolean grafica = Repositorio.ingresarValorBooleano("¿Tiene tarjeta gráfica dedicada?", "Gráfica");
+            equipo = new Escritorio(codigoRegistro, numeroSerie, marca, modelo, year, estadoFisico,
+                    procesador, ramEscritorio, almacenamientoEscritorio, grafica);
+            break;
+        case "3":
+            String sistema = Repositorio.ingresarTexto("Sistema operativo");
+            String almacenamientoTelefono = Repositorio.ingresarTexto("Capacidad de almacenamiento");
+            String capacidadBateria = Repositorio.ingresarTexto("Capacidad de la batería en mAh");
+            boolean cincoG = Repositorio.ingresarValorBooleano("¿Es compatible con 5G?", "5G");
+            equipo = new Telefono(codigoRegistro, numeroSerie, marca, modelo, year, estadoFisico,
+                    sistema, almacenamientoTelefono, capacidadBateria, cincoG);
+            break;
+        default:
+            Repositorio.mostrarMensaje("Opción no válida");
+            return;
+    }
+
+    if(taller.crearEquipo(documento, equipo)){
+        Repositorio.mostrarMensaje("Equipo registrado correctamente");
+    }else{
+        Repositorio.mostrarMensaje("No se pudo registrar: el cliente no existe o el código de registro ya está usado");
+    }
+}
+    private static void crearOrden(Taller taller){
+        String codigoOrden = Repositorio.ingresarTexto("Código de la orden");
+        String documento = Repositorio.ingresarTexto("Documento del cliente");
+        String observaciones = Repositorio.ingresarTexto("Observaciones generales");
+
+        if(taller.crearOrden(codigoOrden, documento, observaciones)){
+            Repositorio.mostrarMensaje("Orden creada correctamente");
+        }else{
+            Repositorio.mostrarMensaje("No se pudo crear: el cliente no existe o el código de la orden ya está usado");
+        }
+    }
+    private static void agregarDetalle(Taller taller){
+        String codigoOrden = Repositorio.ingresarTexto("Código de la orden");
+        String codigoDetalle = Repositorio.ingresarTexto("Código del detalle");
+        String codigoEquipo = Repositorio.ingresarTexto("Código de registro del equipo");
+        String codigoServicio = Repositorio.ingresarTexto("Código del servicio:\n" +
+                "SRV-001 Diagnóstico\nSRV-002 Mantenimiento preventivo\nSRV-003 Reparación correctiva");
+        String falla = Repositorio.ingresarTexto("Falla reportada");
+
+        if(taller.agregarDetalleAOrden(codigoOrden, codigoDetalle, codigoEquipo, codigoServicio, falla)){
+            Repositorio.mostrarMensaje("Detalle agregado correctamente");
+        }else{
+            Repositorio.mostrarMensaje("No se pudo agregar: revise la orden, el equipo, el servicio o que el código del detalle no esté repetido");
+        }
+    }
+    private static void asignarTecnico(Taller taller){
+        String codigoOrden = Repositorio.ingresarTexto("Código de la orden");
+        String codigoDetalle = Repositorio.ingresarTexto("Código del detalle");
+        String codigoTecnico = Repositorio.ingresarTexto("Código del técnico");
+
+        if(taller.asignarTecnico(codigoOrden, codigoDetalle, codigoTecnico)){
+            Repositorio.mostrarMensaje("Técnico asignado correctamente");
+        }else{
+            Repositorio.mostrarMensaje("No se pudo asignar: revise la orden, el detalle y el técnico, que debe estar activo y autorizado para ese equipo");
+        }
+    }
+    private static void registrarRepuestoUtilizado(Taller taller){
+        String codigoOrden = Repositorio.ingresarTexto("Código de la orden");
+        String codigoDetalle = Repositorio.ingresarTexto("Código del detalle");
+        String codigoRepuesto = Repositorio.ingresarTexto("Código del repuesto");
+        int cantidad = Repositorio.ingresarEntero("Cantidad a usar");
+
+        if(taller.registrarRepuestoUtilizado(codigoOrden, codigoDetalle, codigoRepuesto, cantidad)){
+            Repositorio.mostrarMensaje("Repuesto registrado correctamente");
+        }else{
+            Repositorio.mostrarMensaje("No se pudo registrar: el detalle debe ser una reparación correctiva y debe haber existencias suficientes");
+        }
+    }
+
+    private static void registrarHoras(Taller taller){
+        String codigoOrden = Repositorio.ingresarTexto("Código de la orden");
+        String codigoDetalle = Repositorio.ingresarTexto("Código del detalle");
+        int horas = Repositorio.ingresarEntero("Horas de trabajo");
+
+        if(taller.registrarHorasDetalle(codigoOrden, codigoDetalle, horas)){
+            Repositorio.mostrarMensaje("Horas registradas correctamente");
+        }else{
+            Repositorio.mostrarMensaje("No se pudo registrar: revise la orden, el detalle y que las horas sean mayores que 0");
+        }
+    }
+
+    private static void verValorOrden(Taller taller){
+        String codigoOrden = Repositorio.ingresarTexto("Código de la orden");
+        Optional<OrdenServicio> orden = taller.buscarOrden(codigoOrden);
+        if(orden.isEmpty()){
+            Repositorio.mostrarMensaje("La orden no existe");
+            return;
+        }
+        String texto = "Orden " + codigoOrden + "\n";
+        for(DetalleServicio detalle : orden.get().getListaDetalles()){
+            texto += detalle.getCodigoDetalle() + " - " + detalle.getServicio().getNombre() + ": $" + detalle.calcularValor() + "\n";
+        }
+        texto += "TOTAL: $" + orden.get().calcularValorTotal();
+        Repositorio.mostrarMensaje(texto);
+    }
+    private static void crearServicio(Taller taller){
+        String codigo = Repositorio.ingresarTexto("Código del servicio");
+        String nombre = Repositorio.ingresarTexto("Nombre del servicio");
+        String descripcion = Repositorio.ingresarTexto("Descripción del servicio");
+        double tarifaBase = Repositorio.ingresarNumeroDecimal("Tarifa base");
+
+        String opcion = Repositorio.ingresarTexto("Tipo de servicio:\n" +
+                "1. Diagnóstico\n2. Mantenimiento preventivo\n3. Reparación correctiva");
+        Servicio servicio;
+        switch (opcion) {
+            case "1":
+                servicio = new Diagnostico(codigo, nombre, descripcion, tarifaBase);
+                break;
+            case "2":
+                servicio = new MantenimientoPreventivo(codigo, nombre, descripcion, tarifaBase);
+                break;
+            case "3":
+                servicio = new ReparacionCorrectiva(codigo, nombre, descripcion, tarifaBase);
+                break;
+            default:
+                Repositorio.mostrarMensaje("Opción no válida");
+                return;
+        }
+
+        if(taller.crearServicio(servicio)){
+            Repositorio.mostrarMensaje("Servicio registrado correctamente");
+        }else{
+            Repositorio.mostrarMensaje("Ya existe un servicio con ese código");
+        }
+    }
+
     }
