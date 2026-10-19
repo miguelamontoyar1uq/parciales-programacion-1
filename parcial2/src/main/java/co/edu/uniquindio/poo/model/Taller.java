@@ -303,6 +303,10 @@ public class Taller {
         return listaOrdenesServicio.stream().flatMap(orden -> orden.getListaDetalles().stream()).collect(Collectors.groupingBy(detalle -> detalle.getServicio().getNombre(), Collectors.counting()));
     }
 
+    public Map<String, Double> calcularTotalFacturadoPorServicio() {
+        return listaOrdenesServicio.stream().flatMap(orden -> orden.getListaDetalles().stream()).collect(Collectors.groupingBy(detalle -> detalle.getServicio().getNombre(), Collectors.summingDouble(detalle -> detalle.calcularValor())));
+    }
+
     //consultar trabajos de un tecnico
     public Map<EstadoDetalle, List<DetalleServicio>> consultarTrabajosTecnico(String codigo) {
         return listaOrdenesServicio.stream().flatMap(ordenServicio -> ordenServicio.getListaDetalles().stream()).filter(detalleServicio -> detalleServicio.getTecnicoAsignado() != null && detalleServicio.getTecnicoAsignado().getCodigo().equals(codigo)).collect(Collectors.groupingBy(detalleServicio -> detalleServicio.getEstado()));
