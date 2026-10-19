@@ -96,8 +96,8 @@ public class Main {
                     break;
                 // este es por si despues quieren agregar mas servicios
                 case 19:
-                 crearServicio(taller);
-                 break;
+                    crearServicio(taller);
+                    break;
             }
 
 
@@ -113,7 +113,7 @@ public class Main {
                 "el documento del cliente");
 
         String telefono = Repositorio.ingresarTexto("Por favor ingrese el " +
-                        "telefono del cliente");
+                "telefono del cliente");
 
         String direccion= Repositorio.ingresarTexto("Por favor ingrese la " +
                 "direccion del cliente");
@@ -402,13 +402,16 @@ public class Main {
 
     private static void reporteServicios(Taller taller){
         Map<String, Long> servicios = taller.contarServiciosSolicitados();
+        Map<String, Double> valores = taller.calcularTotalFacturadoPorServicio();
         if(servicios.isEmpty()){
             Repositorio.mostrarMensaje("No hay servicios registrados en órdenes");
             return;
         }
         String texto = "REPORTE DE SERVICIOS\n";
         for(Map.Entry<String, Long> servicio : servicios.entrySet()){
-            texto += servicio.getKey() + " - Cantidad: " + servicio.getValue() + "\n";
+            String nombreServicio = servicio.getKey();
+            texto += nombreServicio + " - Cantidad: " + servicio.getValue()
+                    + " - Total facturado: $" + valores.get(nombreServicio) + "\n";
         }
         Repositorio.mostrarMensaje(texto);
     }
@@ -471,7 +474,4 @@ public class Main {
             Repositorio.mostrarMensaje("Ya existe un servicio con ese código");
         }
     }
-
-
-
 }
