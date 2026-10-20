@@ -10,11 +10,52 @@ import java.util.Optional;
 
 public class Main {
     public static void main(String[] args) {
-        Taller taller = new Taller("TechRepair","carrera 25 calle 22 detras " +
-                "del burdel","231","3507823456");
+        Taller taller = new Taller("TechRepair", "carrera 25 calle 22 detras " +
+                "del burdel", "231", "3507823456");
+        // Clientes iniciales
+        taller.crearCliente(new Cliente("Carlos Pérez", "1001", "3101234567", "carlos@gmail.com", "Calle 10 #12-34"));
+        taller.crearCliente(new Cliente("María Rodríguez", "1002", "3209876543", "maria@gmail.com", "Carrera 15 #45-67"));
+        taller.crearCliente(new Cliente("Juan Gómez", "1003", "3005554433", "juan@gmail.com", "Avenida 19 #8-90"));
+
+        // Técnicos iniciales
+        taller.crearTecnico(new Tecnico("TEC-001", "7001", "Ana Martínez", EspecialidadTecnico.COMPUTADORES, EstadoLaboralTecnico.ACTIVO));
+        taller.crearTecnico(new Tecnico("TEC-002", "7002", "Luis Hernández", EspecialidadTecnico.DISPOSITIVOS_MOVILES, EstadoLaboralTecnico.ACTIVO));
+        taller.crearTecnico(new Tecnico("TEC-003", "7003", "Pedro Sánchez", EspecialidadTecnico.SOPORTE_GENERAL, EstadoLaboralTecnico.ACTIVO));
+
+        // Repuestos iniciales
+        taller.crearRepuesto(new Repuesto("REP-001", "Pantalla LCD 15.6", "Pantalla de repuesto para portátil", 250000.0, 10, "COMPUTADORES"));
+        taller.crearRepuesto(new Repuesto("REP-002", "Batería iPhone 11", "Batería Li-Ion 3110 mAh", 120000.0, 3, "DISPOSITIVOS_MOVILES"));
+        taller.crearRepuesto(new Repuesto("REP-003", "Disco SSD 500GB", "Unidad de estado sólido SATA", 180000.0, 15, "COMPUTADORES"));
+
+        // Equipos iniciales
+        taller.crearEquipo("1001", new Portatil("EQ-001", "SN-PORT-01", "Lenovo", "ThinkPad T14", "2022", "Bueno", "14.0", "16GB", "512GB SSD", false));
+        taller.crearEquipo("1002", new Escritorio("EQ-002", "SN-ESC-01", "HP", "Pavilion Gaming", "2021", "Regular", "Intel i7", "32GB", "1TB SSD", true));
+        taller.crearEquipo("1003", new Telefono("EQ-003", "SN-TEL-01", "Samsung", "Galaxy S21", "2023", "Pantalla fisurada", "Android 13", "128GB", "4000 mAh", true));
+
+        // Servicios iniciales
         taller.crearServicio(new Diagnostico("SRV-001", "Diagnóstico", "Identificación de fallas del equipo", 0));
         taller.crearServicio(new MantenimientoPreventivo("SRV-002", "Mantenimiento preventivo", "Limpieza, revisión y optimización", 0));
         taller.crearServicio(new ReparacionCorrectiva("SRV-003", "Reparación correctiva", "Solución de fallas identificadas", 0));
+
+        // Órdenes iniciales
+        taller.crearOrden("ORD-001", "1001", "Revisión urgente de encendido");
+        taller.agregarDetalleAOrden("ORD-001", "DET-001", "EQ-001", "SRV-001", "El portátil no enciende tras descarga");
+        taller.asignarTecnico("ORD-001", "DET-001", "TEC-001");
+        taller.registrarHorasDetalle("ORD-001", "DET-001", 2);
+        taller.actualizarEstadoDetalle("ORD-001", "DET-001", EstadoDetalle.FINALIZADA);
+
+        taller.crearOrden("ORD-002", "1002", "Mantenimiento general programado");
+        taller.agregarDetalleAOrden("ORD-002", "DET-002", "EQ-002", "SRV-002", "Limpieza de ventiladores y cambio de pasta térmica");
+        taller.asignarTecnico("ORD-002", "DET-002", "TEC-003");
+        taller.registrarHorasDetalle("ORD-002", "DET-002", 3);
+        taller.actualizarEstadoDetalle("ORD-002", "DET-002", EstadoDetalle.EN_PROCESO);
+
+        taller.crearOrden("ORD-003", "1003", "Cambio de batería por degradación");
+        taller.agregarDetalleAOrden("ORD-003", "DET-003", "EQ-003", "SRV-003", "Batería hinchada y corta duración");
+        taller.asignarTecnico("ORD-003", "DET-003", "TEC-002");
+        taller.registrarHorasDetalle("ORD-003", "DET-003", 4);
+        taller.registrarRepuestoUtilizado("ORD-003", "DET-003", "REP-002", 1);
+        taller.actualizarEstadoDetalle("ORD-003", "DET-003", EstadoDetalle.FINALIZADA);
         int opcion;
         do {
             opcion = Repositorio.ingresarEntero("MENÚ TECHREPAIR\n" +
@@ -101,42 +142,42 @@ public class Main {
             }
 
 
-        } while(opcion!=0);
+        } while (opcion != 0);
 
     }
 
-    private static void crearCliente(Taller taller){
-        String nombre= Repositorio.ingresarTexto("Por favor ingrese el nombre" +
+    private static void crearCliente(Taller taller) {
+        String nombre = Repositorio.ingresarTexto("Por favor ingrese el nombre" +
                 " del cliente");
 
-        String documento= Repositorio.ingresarTexto("Por favor ingrese el " +
+        String documento = Repositorio.ingresarTexto("Por favor ingrese el " +
                 "el documento del cliente");
 
         String telefono = Repositorio.ingresarTexto("Por favor ingrese el " +
                 "telefono del cliente");
 
-        String direccion= Repositorio.ingresarTexto("Por favor ingrese la " +
+        String direccion = Repositorio.ingresarTexto("Por favor ingrese la " +
                 "direccion del cliente");
 
-        String correo= Repositorio.ingresarTexto("Por favor ingrese el " +
+        String correo = Repositorio.ingresarTexto("Por favor ingrese el " +
                 "correo electronico del cliente");
 
-        Cliente cliente= new Cliente(nombre,documento,telefono,correo,
+        Cliente cliente = new Cliente(nombre, documento, telefono, correo,
                 direccion);
-        if(taller.crearCliente(cliente)){
+        if (taller.crearCliente(cliente)) {
             Repositorio.mostrarMensaje("Cliente registrado correctamente");
-        }else{
+        } else {
             Repositorio.mostrarMensaje("Ya existe un cliente con ese documento");
         }
 
     }
 
-    private static void crearTecnico(Taller taller){
-        String nombre= Repositorio.ingresarTexto("por favor ingrese el nombre" +
+    private static void crearTecnico(Taller taller) {
+        String nombre = Repositorio.ingresarTexto("por favor ingrese el nombre" +
                 " del tecnico a regustrar");
-        String codigo= Repositorio.ingresarTexto("por favor ingrese el codigo" +
+        String codigo = Repositorio.ingresarTexto("por favor ingrese el codigo" +
                 " a asingar al tecnico");
-        String documentoIdentidad= Repositorio.ingresarTexto("por favor " +
+        String documentoIdentidad = Repositorio.ingresarTexto("por favor " +
                 "ingrese el docuemnto del tecnico ");
         String opcion = Repositorio.ingresarTexto("Seleccione la especialidad:\n" +
                 "1. Computadores\n2. Dispositivos móviles\n3. Soporte general");
@@ -158,21 +199,21 @@ public class Main {
 
         Tecnico tecnico = new Tecnico(codigo, documentoIdentidad, nombre,
                 especialidad, EstadoLaboralTecnico.ACTIVO);
-        if(taller.crearTecnico(tecnico)){
+        if (taller.crearTecnico(tecnico)) {
             Repositorio.mostrarMensaje("Técnico registrado correctamente");
-        }else{
+        } else {
             Repositorio.mostrarMensaje("Ya existe un técnico con ese código");
         }
     }
 
-    private static void registarRepuesto(Taller taller){
-        String nombre=Repositorio.ingresarTexto("por favor ingrese el nombre " +
+    private static void registarRepuesto(Taller taller) {
+        String nombre = Repositorio.ingresarTexto("por favor ingrese el nombre " +
                 "del repuesto");
-        String descripcion=Repositorio.ingresarTexto("por favor ingrese la " +
+        String descripcion = Repositorio.ingresarTexto("por favor ingrese la " +
                 "descripcion del repuesto");
-        String codigo=Repositorio.ingresarTexto("por favor ingrese el codigo " +
+        String codigo = Repositorio.ingresarTexto("por favor ingrese el codigo " +
                 "del repuesto");
-        String categoriaCompatibilidad=Repositorio.ingresarTexto("por favor " +
+        String categoriaCompatibilidad = Repositorio.ingresarTexto("por favor " +
                 "ingrese la categoria de compatibilidad");
         double precio = Repositorio.ingresarNumeroDecimal("por favor ingrese " +
                 "el valor unitario del repuesto");
@@ -181,15 +222,15 @@ public class Main {
 
         Repuesto repuesto = new Repuesto(codigo, nombre, descripcion, precio,
                 cantidad, categoriaCompatibilidad);
-        if(taller.crearRepuesto(repuesto)){
+        if (taller.crearRepuesto(repuesto)) {
             Repositorio.mostrarMensaje("Repuesto registrado correctamente");
-        }else{
+        } else {
             Repositorio.mostrarMensaje("No se pudo registrar: el código ya existe, o el precio o la cantidad no son válidos");
         }
     }
 
     // crear equipo
-    private static void crearEquipo(Taller taller){
+    private static void crearEquipo(Taller taller) {
         String documento = Repositorio.ingresarTexto("Documento del cliente dueño del equipo");
         String codigoRegistro = Repositorio.ingresarTexto("Código de registro del equipo");
         String numeroSerie = Repositorio.ingresarTexto("Número de serie");
@@ -231,26 +272,26 @@ public class Main {
                 return;
         }
 
-        if(taller.crearEquipo(documento, equipo)){
+        if (taller.crearEquipo(documento, equipo)) {
             Repositorio.mostrarMensaje("Equipo registrado correctamente");
-        }else{
+        } else {
             Repositorio.mostrarMensaje("No se pudo registrar: el cliente no existe o el código de registro ya está usado");
         }
     }
 
-    private static void crearOrden(Taller taller){
+    private static void crearOrden(Taller taller) {
         String codigoOrden = Repositorio.ingresarTexto("Código de la orden");
         String documento = Repositorio.ingresarTexto("Documento del cliente");
         String observaciones = Repositorio.ingresarTexto("Observaciones generales");
 
-        if(taller.crearOrden(codigoOrden, documento, observaciones)){
+        if (taller.crearOrden(codigoOrden, documento, observaciones)) {
             Repositorio.mostrarMensaje("Orden creada correctamente");
-        }else{
+        } else {
             Repositorio.mostrarMensaje("No se pudo crear: el cliente no existe o el código de la orden ya está usado");
         }
     }
 
-    private static void agregarDetalle(Taller taller){
+    private static void agregarDetalle(Taller taller) {
         String codigoOrden = Repositorio.ingresarTexto("Código de la orden");
         String codigoDetalle = Repositorio.ingresarTexto("Código del detalle");
         String codigoEquipo = Repositorio.ingresarTexto("Código de registro del equipo");
@@ -258,66 +299,66 @@ public class Main {
                 "SRV-001 Diagnóstico\nSRV-002 Mantenimiento preventivo\nSRV-003 Reparación correctiva");
         String falla = Repositorio.ingresarTexto("Falla reportada");
 
-        if(taller.agregarDetalleAOrden(codigoOrden, codigoDetalle, codigoEquipo, codigoServicio, falla)){
+        if (taller.agregarDetalleAOrden(codigoOrden, codigoDetalle, codigoEquipo, codigoServicio, falla)) {
             Repositorio.mostrarMensaje("Detalle agregado correctamente");
-        }else{
+        } else {
             Repositorio.mostrarMensaje("No se pudo agregar: revise la orden, el equipo, el servicio o que el código del detalle no esté repetido");
         }
     }
 
-    private static void asignarTecnico(Taller taller){
+    private static void asignarTecnico(Taller taller) {
         String codigoOrden = Repositorio.ingresarTexto("Código de la orden");
         String codigoDetalle = Repositorio.ingresarTexto("Código del detalle");
         String codigoTecnico = Repositorio.ingresarTexto("Código del técnico");
 
-        if(taller.asignarTecnico(codigoOrden, codigoDetalle, codigoTecnico)){
+        if (taller.asignarTecnico(codigoOrden, codigoDetalle, codigoTecnico)) {
             Repositorio.mostrarMensaje("Técnico asignado correctamente");
-        }else{
+        } else {
             Repositorio.mostrarMensaje("No se pudo asignar: revise la orden, el detalle y el técnico, que debe estar activo y autorizado para ese equipo");
         }
     }
 
-    private static void registrarRepuestoUtilizado(Taller taller){
+    private static void registrarRepuestoUtilizado(Taller taller) {
         String codigoOrden = Repositorio.ingresarTexto("Código de la orden");
         String codigoDetalle = Repositorio.ingresarTexto("Código del detalle");
         String codigoRepuesto = Repositorio.ingresarTexto("Código del repuesto");
         int cantidad = Repositorio.ingresarEntero("Cantidad a usar");
 
-        if(taller.registrarRepuestoUtilizado(codigoOrden, codigoDetalle, codigoRepuesto, cantidad)){
+        if (taller.registrarRepuestoUtilizado(codigoOrden, codigoDetalle, codigoRepuesto, cantidad)) {
             Repositorio.mostrarMensaje("Repuesto registrado correctamente");
-        }else{
+        } else {
             Repositorio.mostrarMensaje("No se pudo registrar: el detalle debe ser una reparación correctiva y debe haber existencias suficientes");
         }
     }
 
-    private static void registrarHoras(Taller taller){
+    private static void registrarHoras(Taller taller) {
         String codigoOrden = Repositorio.ingresarTexto("Código de la orden");
         String codigoDetalle = Repositorio.ingresarTexto("Código del detalle");
         int horas = Repositorio.ingresarEntero("Horas de trabajo");
 
-        if(taller.registrarHorasDetalle(codigoOrden, codigoDetalle, horas)){
+        if (taller.registrarHorasDetalle(codigoOrden, codigoDetalle, horas)) {
             Repositorio.mostrarMensaje("Horas registradas correctamente");
-        }else{
+        } else {
             Repositorio.mostrarMensaje("No se pudo registrar: revise la orden, el detalle y que las horas sean mayores que 0");
         }
     }
 
-    private static void verValorOrden(Taller taller){
+    private static void verValorOrden(Taller taller) {
         String codigoOrden = Repositorio.ingresarTexto("Código de la orden");
         Optional<OrdenServicio> orden = taller.buscarOrden(codigoOrden);
-        if(orden.isEmpty()){
+        if (orden.isEmpty()) {
             Repositorio.mostrarMensaje("La orden no existe");
             return;
         }
         String texto = "Orden " + codigoOrden + "\n";
-        for(DetalleServicio detalle : orden.get().getListaDetalles()){
+        for (DetalleServicio detalle : orden.get().getListaDetalles()) {
             texto += detalle.getCodigoDetalle() + " - " + detalle.getServicio().getNombre() + ": $" + detalle.calcularValor() + "\n";
         }
         texto += "TOTAL: $" + orden.get().calcularValorTotal();
         Repositorio.mostrarMensaje(texto);
     }
 
-    private static void actualizarEstadoDetalle(Taller taller){
+    private static void actualizarEstadoDetalle(Taller taller) {
         String codigoOrden = Repositorio.ingresarTexto("Código de la orden");
         String codigoDetalle = Repositorio.ingresarTexto("Código del detalle");
         String opcion = Repositorio.ingresarTexto("Seleccione el nuevo estado:\n" +
@@ -338,48 +379,48 @@ public class Main {
                 return;
         }
 
-        if(taller.actualizarEstadoDetalle(codigoOrden, codigoDetalle, nuevoEstado)){
+        if (taller.actualizarEstadoDetalle(codigoOrden, codigoDetalle, nuevoEstado)) {
             Repositorio.mostrarMensaje("Estado actualizado correctamente");
-        }else{
+        } else {
             Repositorio.mostrarMensaje("No se pudo actualizar: revise la orden, el detalle o que el cambio de estado sea permitido");
         }
     }
 
-    private static void finalizarOrden(Taller taller){
+    private static void finalizarOrden(Taller taller) {
         String codigoOrden = Repositorio.ingresarTexto("Código de la orden");
 
-        if(taller.finalizarOrden(codigoOrden)){
+        if (taller.finalizarOrden(codigoOrden)) {
             Repositorio.mostrarMensaje("Orden finalizada correctamente");
-        }else{
+        } else {
             Repositorio.mostrarMensaje("No se pudo finalizar: la orden no existe o todavía tiene detalles sin finalizar");
         }
     }
 
-    private static void consultarOrdenesCliente(Taller taller){
+    private static void consultarOrdenesCliente(Taller taller) {
         String documento = Repositorio.ingresarTexto("Documento del cliente");
         List<OrdenServicio> ordenes = taller.consultarOrdenesCliente(documento);
-        if(ordenes.isEmpty()){
+        if (ordenes.isEmpty()) {
             Repositorio.mostrarMensaje("El cliente no tiene órdenes registradas o no existe");
             return;
         }
         String texto = "Órdenes del cliente " + documento + "\n";
-        for(OrdenServicio orden : ordenes){
+        for (OrdenServicio orden : ordenes) {
             texto += orden.getCodigoOrden() + " - Total: $" + orden.calcularValorTotal() + "\n";
         }
         Repositorio.mostrarMensaje(texto);
     }
 
-    private static void consultarTrabajosTecnico(Taller taller){
+    private static void consultarTrabajosTecnico(Taller taller) {
         String codigo = Repositorio.ingresarTexto("Código del técnico");
         Map<EstadoDetalle, List<DetalleServicio>> trabajos = taller.consultarTrabajosTecnico(codigo);
-        if(trabajos.isEmpty()){
+        if (trabajos.isEmpty()) {
             Repositorio.mostrarMensaje("El técnico no tiene trabajos asignados o no existe");
             return;
         }
         String texto = "Trabajos del técnico " + codigo + "\n";
-        for(Map.Entry<EstadoDetalle, List<DetalleServicio>> grupo : trabajos.entrySet()){
+        for (Map.Entry<EstadoDetalle, List<DetalleServicio>> grupo : trabajos.entrySet()) {
             texto += "\n" + grupo.getKey() + ":\n";
-            for(DetalleServicio detalle : grupo.getValue()){
+            for (DetalleServicio detalle : grupo.getValue()) {
                 texto += detalle.getCodigoDetalle() + " - " + detalle.getServicio().getNombre()
                         + " - Equipo: " + detalle.getEquipo().getCodigoRegistro() + "\n";
             }
@@ -387,28 +428,28 @@ public class Main {
         Repositorio.mostrarMensaje(texto);
     }
 
-    private static void consultarEquiposPendientes(Taller taller){
+    private static void consultarEquiposPendientes(Taller taller) {
         List<EquipoTecnologico> equipos = taller.hallarEquiposPendientes();
-        if(equipos.isEmpty()){
+        if (equipos.isEmpty()) {
             Repositorio.mostrarMensaje("No hay equipos pendientes");
             return;
         }
         String texto = "EQUIPOS PENDIENTES\n";
-        for(EquipoTecnologico equipo : equipos){
+        for (EquipoTecnologico equipo : equipos) {
             texto += equipo.getCodigoRegistro() + "\n";
         }
         Repositorio.mostrarMensaje(texto);
     }
 
-    private static void reporteServicios(Taller taller){
+    private static void reporteServicios(Taller taller) {
         Map<String, Long> servicios = taller.contarServiciosSolicitados();
         Map<String, Double> valores = taller.calcularTotalFacturadoPorServicio();
-        if(servicios.isEmpty()){
+        if (servicios.isEmpty()) {
             Repositorio.mostrarMensaje("No hay servicios registrados en órdenes");
             return;
         }
         String texto = "REPORTE DE SERVICIOS\n";
-        for(Map.Entry<String, Long> servicio : servicios.entrySet()){
+        for (Map.Entry<String, Long> servicio : servicios.entrySet()) {
             String nombreServicio = servicio.getKey();
             texto += nombreServicio + " - Cantidad: " + servicio.getValue()
                     + " - Total facturado: $" + valores.get(nombreServicio) + "\n";
@@ -416,35 +457,35 @@ public class Main {
         Repositorio.mostrarMensaje(texto);
     }
 
-    private static void reporteTecnicos(Taller taller){
+    private static void reporteTecnicos(Taller taller) {
         Map<String, Long> intervenciones = taller.contarIntervencionesPorTecnico();
         Map<String, Double> valores = taller.valorAtendidoPorTecnico();
-        if(intervenciones.isEmpty()){
+        if (intervenciones.isEmpty()) {
             Repositorio.mostrarMensaje("Ningún técnico tiene intervenciones finalizadas");
             return;
         }
         String texto = "REPORTE DE TÉCNICOS\n";
-        for(Map.Entry<String, Long> tecnico : intervenciones.entrySet()){
+        for (Map.Entry<String, Long> tecnico : intervenciones.entrySet()) {
             texto += tecnico.getKey() + " - Intervenciones: " + tecnico.getValue()
                     + " - Valor atendido: $" + valores.get(tecnico.getKey()) + "\n";
         }
         Repositorio.mostrarMensaje(texto);
     }
 
-    private static void consultarInventarioCritico(Taller taller){
+    private static void consultarInventarioCritico(Taller taller) {
         List<Repuesto> repuestos = taller.consultarInventarioCritico();
-        if(repuestos.isEmpty()){
+        if (repuestos.isEmpty()) {
             Repositorio.mostrarMensaje("No hay repuestos en inventario crítico");
             return;
         }
         String texto = "INVENTARIO CRÍTICO\n";
-        for(Repuesto repuesto : repuestos){
+        for (Repuesto repuesto : repuestos) {
             texto += repuesto.getCodigo() + " - Disponibles: " + repuesto.getCantidadDisponible() + "\n";
         }
         Repositorio.mostrarMensaje(texto);
     }
 
-    private static void crearServicio(Taller taller){
+    private static void crearServicio(Taller taller) {
         String codigo = Repositorio.ingresarTexto("Código del servicio");
         String nombre = Repositorio.ingresarTexto("Nombre del servicio");
         String descripcion = Repositorio.ingresarTexto("Descripción del servicio");
@@ -468,9 +509,9 @@ public class Main {
                 return;
         }
 
-        if(taller.crearServicio(servicio)){
+        if (taller.crearServicio(servicio)) {
             Repositorio.mostrarMensaje("Servicio registrado correctamente");
-        }else{
+        } else {
             Repositorio.mostrarMensaje("Ya existe un servicio con ese código");
         }
     }
