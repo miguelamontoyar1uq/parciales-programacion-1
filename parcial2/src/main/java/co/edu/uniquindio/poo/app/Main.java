@@ -2,16 +2,14 @@ package co.edu.uniquindio.poo.app;
 
 import co.edu.uniquindio.poo.model.*;
 
-import javax.swing.*;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 public class Main {
     public static void main(String[] args) {
-        Taller taller = new Taller("TechRepair", "carrera 25 calle 22 detras " +
-                "del burdel", "231", "3507823456");
+        Taller taller = new Taller("TechRepair", "carrera 25 calle 22 detras del burdel", "231", "3507823456");
+
         // Clientes iniciales
         taller.crearCliente(new Cliente("Carlos Pérez", "1001", "3101234567", "carlos@gmail.com", "Calle 10 #12-34"));
         taller.crearCliente(new Cliente("María Rodríguez", "1002", "3209876543", "maria@gmail.com", "Carrera 15 #45-67"));
@@ -56,6 +54,7 @@ public class Main {
         taller.registrarHorasDetalle("ORD-003", "DET-003", 4);
         taller.registrarRepuestoUtilizado("ORD-003", "DET-003", "REP-002", 1);
         taller.actualizarEstadoDetalle("ORD-003", "DET-003", EstadoDetalle.FINALIZADA);
+
         int opcion;
         do {
             opcion = Repositorio.ingresarEntero("MENÚ TECHREPAIR\n" +
@@ -135,52 +134,34 @@ public class Main {
                 case 18:
                     consultarInventarioCritico(taller);
                     break;
-                // este es por si despues quieren agregar mas servicios
                 case 19:
                     crearServicio(taller);
                     break;
             }
 
-
         } while (opcion != 0);
-
     }
 
     private static void crearCliente(Taller taller) {
-        String nombre = Repositorio.ingresarTexto("Por favor ingrese el nombre" +
-                " del cliente");
+        String nombre = Repositorio.ingresarTexto("Por favor ingrese el nombre del cliente");
+        String documento = Repositorio.ingresarTexto("Por favor ingrese el documento del cliente");
+        String telefono = Repositorio.ingresarTexto("Por favor ingrese el teléfono del cliente");
+        String direccion = Repositorio.ingresarTexto("Por favor ingrese la dirección del cliente");
+        String correo = Repositorio.ingresarTexto("Por favor ingrese el correo electrónico del cliente");
 
-        String documento = Repositorio.ingresarTexto("Por favor ingrese el " +
-                "el documento del cliente");
-
-        String telefono = Repositorio.ingresarTexto("Por favor ingrese el " +
-                "telefono del cliente");
-
-        String direccion = Repositorio.ingresarTexto("Por favor ingrese la " +
-                "direccion del cliente");
-
-        String correo = Repositorio.ingresarTexto("Por favor ingrese el " +
-                "correo electronico del cliente");
-
-        Cliente cliente = new Cliente(nombre, documento, telefono, correo,
-                direccion);
+        Cliente cliente = new Cliente(nombre, documento, telefono, correo, direccion);
         if (taller.crearCliente(cliente)) {
             Repositorio.mostrarMensaje("Cliente registrado correctamente");
         } else {
             Repositorio.mostrarMensaje("Ya existe un cliente con ese documento");
         }
-
     }
 
     private static void crearTecnico(Taller taller) {
-        String nombre = Repositorio.ingresarTexto("por favor ingrese el nombre" +
-                " del tecnico a regustrar");
-        String codigo = Repositorio.ingresarTexto("por favor ingrese el codigo" +
-                " a asingar al tecnico");
-        String documentoIdentidad = Repositorio.ingresarTexto("por favor " +
-                "ingrese el docuemnto del tecnico ");
-        String opcion = Repositorio.ingresarTexto("Seleccione la especialidad:\n" +
-                "1. Computadores\n2. Dispositivos móviles\n3. Soporte general");
+        String nombre = Repositorio.ingresarTexto("Por favor ingrese el nombre del técnico a registrar");
+        String codigo = Repositorio.ingresarTexto("Por favor ingrese el código a asignar al técnico");
+        String documentoIdentidad = Repositorio.ingresarTexto("Por favor ingrese el documento del técnico");
+        String opcion = Repositorio.ingresarTexto("Seleccione la especialidad:\n1. Computadores\n2. Dispositivos móviles\n3. Soporte general");
         EspecialidadTecnico especialidad;
         switch (opcion) {
             case "1":
@@ -197,8 +178,7 @@ public class Main {
                 return;
         }
 
-        Tecnico tecnico = new Tecnico(codigo, documentoIdentidad, nombre,
-                especialidad, EstadoLaboralTecnico.ACTIVO);
+        Tecnico tecnico = new Tecnico(codigo, documentoIdentidad, nombre, especialidad, EstadoLaboralTecnico.ACTIVO);
         if (taller.crearTecnico(tecnico)) {
             Repositorio.mostrarMensaje("Técnico registrado correctamente");
         } else {
@@ -207,21 +187,14 @@ public class Main {
     }
 
     private static void registarRepuesto(Taller taller) {
-        String nombre = Repositorio.ingresarTexto("por favor ingrese el nombre " +
-                "del repuesto");
-        String descripcion = Repositorio.ingresarTexto("por favor ingrese la " +
-                "descripcion del repuesto");
-        String codigo = Repositorio.ingresarTexto("por favor ingrese el codigo " +
-                "del repuesto");
-        String categoriaCompatibilidad = Repositorio.ingresarTexto("por favor " +
-                "ingrese la categoria de compatibilidad");
-        double precio = Repositorio.ingresarNumeroDecimal("por favor ingrese " +
-                "el valor unitario del repuesto");
-        int cantidad = Repositorio.ingresarEntero("por favor ingrese la " +
-                "cantidad de repuestos");
+        String nombre = Repositorio.ingresarTexto("Por favor ingrese el nombre del repuesto");
+        String descripcion = Repositorio.ingresarTexto("Por favor ingrese la descripción del repuesto");
+        String codigo = Repositorio.ingresarTexto("Por favor ingrese el código del repuesto");
+        String categoriaCompatibilidad = Repositorio.ingresarTexto("Por favor ingrese la categoría de compatibilidad");
+        double precio = Repositorio.ingresarNumeroDecimal("Por favor ingrese el valor unitario del repuesto");
+        int cantidad = Repositorio.ingresarEntero("Por favor ingrese la cantidad de repuestos");
 
-        Repuesto repuesto = new Repuesto(codigo, nombre, descripcion, precio,
-                cantidad, categoriaCompatibilidad);
+        Repuesto repuesto = new Repuesto(codigo, nombre, descripcion, precio, cantidad, categoriaCompatibilidad);
         if (taller.crearRepuesto(repuesto)) {
             Repositorio.mostrarMensaje("Repuesto registrado correctamente");
         } else {
@@ -229,7 +202,6 @@ public class Main {
         }
     }
 
-    // crear equipo
     private static void crearEquipo(Taller taller) {
         String documento = Repositorio.ingresarTexto("Documento del cliente dueño del equipo");
         String codigoRegistro = Repositorio.ingresarTexto("Código de registro del equipo");
@@ -239,8 +211,7 @@ public class Main {
         String year = Repositorio.ingresarTexto("Año de fabricación");
         String estadoFisico = Repositorio.ingresarTexto("Estado físico del equipo");
 
-        String opcion = Repositorio.ingresarTexto("Seleccione la categoría:\n" +
-                "1. Portátil\n2. Escritorio\n3. Teléfono");
+        String opcion = Repositorio.ingresarTexto("Seleccione la categoría:\n1. Portátil\n2. Escritorio\n3. Teléfono");
         EquipoTecnologico equipo;
         switch (opcion) {
             case "1":
@@ -248,24 +219,21 @@ public class Main {
                 String ramPortatil = Repositorio.ingresarTexto("Memoria RAM");
                 String almacenamientoPortatil = Repositorio.ingresarTexto("Capacidad de almacenamiento");
                 boolean bateria = Repositorio.ingresarValorBooleano("¿Tiene batería extraíble?", "Batería");
-                equipo = new Portatil(codigoRegistro, numeroSerie, marca, modelo, year, estadoFisico,
-                        pantalla, ramPortatil, almacenamientoPortatil, bateria);
+                equipo = new Portatil(codigoRegistro, numeroSerie, marca, modelo, year, estadoFisico, pantalla, ramPortatil, almacenamientoPortatil, bateria);
                 break;
             case "2":
                 String procesador = Repositorio.ingresarTexto("Tipo de procesador");
                 String ramEscritorio = Repositorio.ingresarTexto("Memoria RAM");
                 String almacenamientoEscritorio = Repositorio.ingresarTexto("Capacidad de almacenamiento");
                 boolean grafica = Repositorio.ingresarValorBooleano("¿Tiene tarjeta gráfica dedicada?", "Gráfica");
-                equipo = new Escritorio(codigoRegistro, numeroSerie, marca, modelo, year, estadoFisico,
-                        procesador, ramEscritorio, almacenamientoEscritorio, grafica);
+                equipo = new Escritorio(codigoRegistro, numeroSerie, marca, modelo, year, estadoFisico, procesador, ramEscritorio, almacenamientoEscritorio, grafica);
                 break;
             case "3":
                 String sistema = Repositorio.ingresarTexto("Sistema operativo");
                 String almacenamientoTelefono = Repositorio.ingresarTexto("Capacidad de almacenamiento");
                 String capacidadBateria = Repositorio.ingresarTexto("Capacidad de la batería en mAh");
                 boolean cincoG = Repositorio.ingresarValorBooleano("¿Es compatible con 5G?", "5G");
-                equipo = new Telefono(codigoRegistro, numeroSerie, marca, modelo, year, estadoFisico,
-                        sistema, almacenamientoTelefono, capacidadBateria, cincoG);
+                equipo = new Telefono(codigoRegistro, numeroSerie, marca, modelo, year, estadoFisico, sistema, almacenamientoTelefono, capacidadBateria, cincoG);
                 break;
             default:
                 Repositorio.mostrarMensaje("Opción no válida");
@@ -295,8 +263,7 @@ public class Main {
         String codigoOrden = Repositorio.ingresarTexto("Código de la orden");
         String codigoDetalle = Repositorio.ingresarTexto("Código del detalle");
         String codigoEquipo = Repositorio.ingresarTexto("Código de registro del equipo");
-        String codigoServicio = Repositorio.ingresarTexto("Código del servicio:\n" +
-                "SRV-001 Diagnóstico\nSRV-002 Mantenimiento preventivo\nSRV-003 Reparación correctiva");
+        String codigoServicio = Repositorio.ingresarTexto("Código del servicio:\nSRV-001 Diagnóstico\nSRV-002 Mantenimiento preventivo\nSRV-003 Reparación correctiva");
         String falla = Repositorio.ingresarTexto("Falla reportada");
 
         if (taller.agregarDetalleAOrden(codigoOrden, codigoDetalle, codigoEquipo, codigoServicio, falla)) {
@@ -361,8 +328,7 @@ public class Main {
     private static void actualizarEstadoDetalle(Taller taller) {
         String codigoOrden = Repositorio.ingresarTexto("Código de la orden");
         String codigoDetalle = Repositorio.ingresarTexto("Código del detalle");
-        String opcion = Repositorio.ingresarTexto("Seleccione el nuevo estado:\n" +
-                "1. Pendiente\n2. En proceso\n3. Finalizada");
+        String opcion = Repositorio.ingresarTexto("Seleccione el nuevo estado:\n1. Pendiente\n2. En proceso\n3. Finalizada");
         EstadoDetalle nuevoEstado;
         switch (opcion) {
             case "1":
@@ -403,7 +369,9 @@ public class Main {
             Repositorio.mostrarMensaje("El cliente no tiene órdenes registradas o no existe");
             return;
         }
-        String texto = "Órdenes del cliente " + documento + "\n";
+        Optional<Cliente> cliente = taller.buscarCliente(documento);
+        String nombreCliente = cliente.isPresent() ? cliente.get().getNombre() : "";
+        String texto = "Órdenes del cliente " + nombreCliente + " (" + documento + ")\n";
         for (OrdenServicio orden : ordenes) {
             texto += orden.getCodigoOrden() + " - Total: $" + orden.calcularValorTotal() + "\n";
         }
@@ -417,12 +385,15 @@ public class Main {
             Repositorio.mostrarMensaje("El técnico no tiene trabajos asignados o no existe");
             return;
         }
-        String texto = "Trabajos del técnico " + codigo + "\n";
+        Optional<Tecnico> tecnico = taller.buscarTecnico(codigo);
+        String nombreTecnico = tecnico.isPresent() ? tecnico.get().getNombre() : "";
+        String texto = "Trabajos del técnico " + nombreTecnico + " (" + codigo + ")\n";
         for (Map.Entry<EstadoDetalle, List<DetalleServicio>> grupo : trabajos.entrySet()) {
             texto += "\n" + grupo.getKey() + ":\n";
             for (DetalleServicio detalle : grupo.getValue()) {
+                EquipoTecnologico eq = detalle.getEquipo();
                 texto += detalle.getCodigoDetalle() + " - " + detalle.getServicio().getNombre()
-                        + " - Equipo: " + detalle.getEquipo().getCodigoRegistro() + "\n";
+                        + " - Equipo: " + eq.getMarca() + " " + eq.getModelo() + " (" + eq.getCodigoRegistro() + ")\n";
             }
         }
         Repositorio.mostrarMensaje(texto);
@@ -436,7 +407,7 @@ public class Main {
         }
         String texto = "EQUIPOS PENDIENTES\n";
         for (EquipoTecnologico equipo : equipos) {
-            texto += equipo.getCodigoRegistro() + "\n";
+            texto += equipo.getMarca() + " " + equipo.getModelo() + " (Código: " + equipo.getCodigoRegistro() + ")\n";
         }
         Repositorio.mostrarMensaje(texto);
     }
@@ -480,7 +451,7 @@ public class Main {
         }
         String texto = "INVENTARIO CRÍTICO\n";
         for (Repuesto repuesto : repuestos) {
-            texto += repuesto.getCodigo() + " - Disponibles: " + repuesto.getCantidadDisponible() + "\n";
+            texto += repuesto.getNombre() + " (Código: " + repuesto.getCodigo() + ") - Disponibles: " + repuesto.getCantidadDisponible() + "\n";
         }
         Repositorio.mostrarMensaje(texto);
     }
