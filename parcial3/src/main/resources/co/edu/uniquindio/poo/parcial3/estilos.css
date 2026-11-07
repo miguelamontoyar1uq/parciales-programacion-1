@@ -1,0 +1,112 @@
+.root {
+    -fx-background-color: #F2FFFF;
+    -fx-font-family: "Georgia", "Libre Baskerville", serif;
+}
+
+.titulo {
+    -fx-font-size: 44px;
+    -fx-text-fill: #2D0A0A;
+    -fx-text-alignment: center;
+}
+
+.etiqueta {
+    -fx-font-size: 19px;
+    -fx-text-fill: #2D0A0A;
+}
+
+.nota {
+    -fx-font-size: 13px;
+    -fx-font-style: italic;
+    -fx-text-fill: #5A4A4A;
+}
+
+.text-field {
+    -fx-background-color: #C8D0D9;
+    -fx-background-radius: 0;
+    -fx-font-size: 15px;
+    -fx-pref-height: 32px;
+}
+
+.combo-box {
+    -fx-background-color: #C8D0D9;
+    -fx-background-radius: 0;
+    -fx-font-size: 15px;
+    -fx-pref-height: 32px;
+}
+
+.spinner {
+    -fx-background-color: #C8D0D9;
+    -fx-background-radius: 0;
+}
+
+.spinner .text-field {
+    -fx-background-color: #C8D0D9;
+    -fx-background-radius: 0;
+}
+
+.boton-azul, .boton-rojo, .boton-gris {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-pref-width: 300px;
+    -fx-pref-height: 42px;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-border-color: #777777;
+    -fx-cursor: hand;
+}
+
+.boton-azul { -fx-background-color: #0082CC; -fx-text-fill: white; }
+.boton-rojo { -fx-background-color: #CC0000; -fx-text-fill: white; }
+.boton-gris { -fx-background-color: #C2CCE3; -fx-text-fill: black; }
+
+.boton-azul:hover { -fx-background-color: #0070B0; }
+.boton-rojo:hover { -fx-background-color: #A80000; }
+.boton-gris:hover { -fx-background-color: #AEB9D4; }
+
+.boton-regresar {
+    -fx-background-color: #C8E0FF;
+    -fx-border-color: #222222;
+    -fx-border-width: 2;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.table-view {
+    -fx-background-color: #F2FFFF;
+    -fx-border-color: #9AABFF;
+    -fx-border-width: 2;
+}
+
+.table-view .column-header,
+.table-view .filler {
+    -fx-background-color: #CCD5FF;
+    -fx-border-color: #9AABFF;
+    -fx-border-width: 0 1 1 0;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #111111;
+    -fx-font-weight: bold;
+}
+
+.table-row-cell {
+    -fx-background-color: #F2FFFF;
+    -fx-border-color: #9AABFF;
+    -fx-border-width: 0 0 1 0;
+    -fx-cell-size: 38px;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #CCD5FF;
+}
+
+.table-row-cell:selected .table-cell {
+    -fx-text-fill: #111111;
+}
+
+.table-cell {
+    -fx-alignment: CENTER;
+    -fx-text-fill: #111111;
+}
