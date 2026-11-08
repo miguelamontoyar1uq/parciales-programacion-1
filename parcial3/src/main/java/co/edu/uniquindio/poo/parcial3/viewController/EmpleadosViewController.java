@@ -113,6 +113,10 @@ public class EmpleadosViewController extends VBox {
         tablaEmpleados.getColumns().add(Estilos.<Empleado>columna("Minutos Disponibles",
                 e -> String.valueOf(e.getMinutosDisponibles())));
         tablaEmpleados.getColumns().add(Estilos.<Empleado>columna("Tipo", e -> empleadosController.obtenerTipo(e)));
+        tablaEmpleados.getColumns().add(Estilos.<Empleado>columna("Caja Asignada", e -> {
+            String caja = empleadosController.obtenerCaja(e);
+            return (caja == null || caja.isBlank()) ? "—" : caja;
+        }));
         tablaEmpleados.setItems(listaEmpleados);
     }
 

@@ -63,7 +63,7 @@
             </children>
         </HBox>
 
-        <TableView fx:id="tblPedidos" prefHeight="220.0" VBox.vgrow="ALWAYS">
+        <TableView fx:id="tblPedidos" minHeight="120.0" prefHeight="180.0" VBox.vgrow="ALWAYS">
             <columns>
                 <TableColumn fx:id="colCodigo" text="Código" />
                 <TableColumn fx:id="colCliente" text="Nombre Cliente" />

@@ -67,13 +67,14 @@
             </children>
         </HBox>
 
-        <TableView fx:id="tblEmpleados" prefHeight="190.0" VBox.vgrow="ALWAYS">
+        <TableView fx:id="tblEmpleados" minHeight="120.0" prefHeight="180.0" VBox.vgrow="ALWAYS">
             <columns>
                 <TableColumn fx:id="colDocumento" text="Documento" />
                 <TableColumn fx:id="colNombre" text="Nombre" />
                 <TableColumn fx:id="colCodigo" text="Código" />
                 <TableColumn fx:id="colMinutos" text="Minutos Disponibles" />
                 <TableColumn fx:id="colTipo" text="Tipo" />
+                <TableColumn fx:id="colCaja" text="Caja Asignada" />
             </columns>
             <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
