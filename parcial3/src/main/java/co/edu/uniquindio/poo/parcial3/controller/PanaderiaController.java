@@ -5,9 +5,13 @@ import co.edu.uniquindio.poo.parcial3.model.*;
 public class PanaderiaController {
 
     private Panaderia panaderia;
+    private EmpleadosController empleadosController;
+    private PedidosController pedidosController;
 
     public PanaderiaController() {
         this.panaderia = new Panaderia("El Trigal");
+        this.empleadosController = new EmpleadosController(panaderia);
+        this.pedidosController = new PedidosController(panaderia);
         inicializarDatosPrueba();
     }
 
@@ -29,5 +33,13 @@ public class PanaderiaController {
 
     public void cancelarPedido(String codigo) {
         panaderia.cancelarPedido(codigo);
+    }
+
+    public EmpleadosController getEmpleadosController() {
+        return empleadosController;
+    }
+
+    public PedidosController getPedidosController() {
+        return pedidosController;
     }
 }

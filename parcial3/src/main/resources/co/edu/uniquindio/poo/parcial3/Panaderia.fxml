@@ -6,7 +6,7 @@
 
 <VBox alignment="CENTER" spacing="35.0" stylesheets="@estilos.css"
       xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="co.edu.uniquindio.poo.parcial3.viewcontroller.PanaderiaViewController">
+      fx:controller="co.edu.uniquindio.poo.parcial3.viewController.PanaderiaViewController">
     <children>
         <Label styleClass="titulo" text="Sistema de Gestión&#10;Panadería El Trigal" textAlignment="CENTER" />
         <Button onAction="#irEmpleados" styleClass="boton-azul" text="Gestión de Empleados" />
